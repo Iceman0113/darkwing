@@ -1498,7 +1498,7 @@ export default function Darkwing() {
 
   // ── STYLES ────────────────────────────────────────────────────────
   const S={
-    root:{fontFamily:"'VT323','Courier New',monospace",background:C.bg,color:C.text,minHeight:"100vh",maxWidth:520,margin:"0 auto",position:"relative",overflow:"hidden",filter:glitch?"hue-rotate(60deg) brightness(1.6)":"none",transition:"filter .08s"},
+    root:{fontFamily:"'VT323','Courier New',monospace",background:C.bg,color:C.text,height:"100dvh",maxWidth:520,margin:"0 auto",position:"relative",overflow:"hidden",display:"flex",flexDirection:"column",filter:glitch?"hue-rotate(60deg) brightness(1.6)":"none",transition:"filter .08s"},
     scanlines:{position:"fixed",inset:0,zIndex:999,pointerEvents:"none",background:"repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,0,0,0.03) 4px,rgba(0,0,0,0.03) 5px)"},
     vignette:{position:"fixed",inset:0,zIndex:998,pointerEvents:"none",background:"radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.65) 100%)"},
     hdr:{background:C.bgDeep,borderBottom:`2px solid ${C.purple}`,padding:"10px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:20},
@@ -1506,9 +1506,9 @@ export default function Darkwing() {
     tabs:{display:"flex",background:C.bgDeep,borderBottom:`1px solid ${C.purple}`},
     tab:a=>({flex:1,padding:"11px 4px",background:"none",border:"none",fontFamily:"'VT323',monospace",fontSize:17,letterSpacing:1,color:a?C.accent:C.textDim,borderBottom:a?`3px solid ${C.accent}`:"3px solid transparent",cursor:"pointer",transition:"all .15s"}),
     card:(lk,dn)=>({margin:"10px 14px",padding:"14px 16px",border:`1px solid ${dn?C.purple:lk?C.textFade:C.purpleHi}`,borderLeft:`4px solid ${dn?C.accent:lk?C.textFade:C.gold}`,background:lk?C.bgDeep:dn?C.bgCard+"88":C.bgCard,cursor:lk?"not-allowed":"pointer",position:"relative",opacity:lk?0.55:1,transition:"all .2s"}),
-    termWrap:{background:C.bgDeep,border:`1px solid ${C.purple}`,borderTop:`3px solid ${C.accent}`,margin:"0 14px 8px"},
-    termBar:{background:C.bgCard,borderBottom:`1px solid ${C.slate}`,padding:"7px 12px",display:"flex",alignItems:"center",gap:8},
-    termBody:{padding:"12px 14px",minHeight:220,height:"52vh",maxHeight:"58vh",overflowY:"auto",fontSize:16,overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"},
+    termWrap:{background:C.bgDeep,border:`1px solid ${C.purple}`,borderTop:`3px solid ${C.accent}`,margin:"0 14px 0",display:"flex",flexDirection:"column",flex:1,minHeight:0},
+    termBar:{background:C.bgCard,borderBottom:`1px solid ${C.slate}`,padding:"7px 12px",display:"flex",alignItems:"center",gap:8,flexShrink:0},
+    termBody:{padding:"12px 14px",flex:1,minHeight:0,overflowY:"auto",fontSize:16,overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"},
     termInput:{display:"flex",alignItems:"center",gap:8,padding:"8px 14px",borderTop:`1px solid ${C.slate}`,background:C.bgDeep},
     termField:{flex:1,background:"none",border:"none",outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:17,caretColor:C.accent},
     flagBox:{margin:"0 14px 8px",padding:"14px 16px",border:`1px solid ${C.gold}55`,background:C.bgCard,borderLeft:`4px solid ${C.gold}`},
@@ -1549,17 +1549,18 @@ export default function Darkwing() {
           </div>
         </div>
 
-        <div style={{padding:"10px 16px 7px",borderBottom:`1px solid ${C.slate}`}}>
+        <div style={{flexShrink:0,padding:"10px 16px 7px",borderBottom:`1px solid ${C.slate}`}}>
           {isDaily&&<div style={{fontSize:13,color:C.gold,letterSpacing:3,marginBottom:3}}>📅 DAILY</div>}
           <div style={{fontSize:20,color:C.text,letterSpacing:1}}>{title}</div>
         </div>
 
-        <div style={{display:"flex",gap:5,padding:"7px 16px",borderBottom:`1px solid ${C.slate}`}}>
+        <div style={{flexShrink:0,display:"flex",gap:5,padding:"7px 16px",borderBottom:`1px solid ${C.slate}`}}>
           {steps.map((_,i)=><div key={i} style={{flex:1,height:5,background:i<stepIdx?C.accent:i===stepIdx?cc:C.slate,boxShadow:i===stepIdx?`0 0 6px ${cc}`:"none",transition:"all .3s",borderRadius:2}}/>)}
         </div>
 
+        <div style={{flex:1,display:"flex",flexDirection:"column",minHeight:0,overflowY:"auto",overscrollBehavior:"contain"}}>
         {duckyMsg&&(
-          <div style={S.duckyBox}>
+          <div style={{...S.duckyBox,flexShrink:0}}>
             <div style={{fontSize:26,lineHeight:1,flexShrink:0}}>🦆</div>
             <div style={{flex:1}}>
               <div style={{fontSize:13,color:C.gold,letterSpacing:3,marginBottom:3}}>DUCKY</div>
@@ -1569,7 +1570,7 @@ export default function Darkwing() {
           </div>
         )}
 
-        <div style={{padding:"4px 0 0"}}>
+        <div style={{flex:1,display:"flex",flexDirection:"column",minHeight:0,padding:"4px 0 0"}}>
           <div style={S.termWrap}>
             <div style={S.termBar}>
               <div style={{width:11,height:11,borderRadius:"50%",background:C.red}}/>
@@ -1654,7 +1655,8 @@ export default function Darkwing() {
             </button>
           </div>
         )}
-        <div style={{height:28}}/><style>{GCSS}</style>
+        </div>{/* closes outer content area */}
+        <style>{GCSS}</style>
       </div>
     );
   };
@@ -1752,6 +1754,9 @@ export default function Darkwing() {
           🪪 DOSSIER
         </button>
       </div>
+
+      {/* scrollable tab content */}
+      <div style={{flex:1,overflowY:"auto",overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"}}>
 
       {/* ── MAP ── */}
       {tab==="map"&&(
@@ -1913,6 +1918,8 @@ export default function Darkwing() {
           })}
         </div>
       )}
+
+      </div>{/* end scrollable tab content */}
 
       <style>{GCSS}</style>
     </div>
