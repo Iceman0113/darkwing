@@ -212,7 +212,7 @@ const DUCKY = {
   replay:["Replay mode! Ducky respects the grind. 🦆","Chasing those 3 stars? Ducky has done the same.","No hints this time. You know the playbook."],
 };
 const duck = k => { const p=DUCKY[k]; if(!p) return ""; return p[Math.floor(Math.random()*p.length)]; };
-const calcStars = (e,h,w) => { if(h>=2||w>=5) return 1; if(h===1||w>=3||e>180) return 2; if(e>90) return 2; return 3; };
+const calcStars = (e,h,w) => { if(h>=2||w>=5) return 1; if(h===1||w>=3||e>90) return 2; return 3; };
 const normalize = s => s.toLowerCase().replace(/['"]/g,"'").replace(/\s+/g," ").trim();
 const catColor  = c => ({WEB:"#00C9B1",CRYPTO:"#9B59B6",FORENSICS:"#F5C842",PRIVESC:"#FF4466",OSINT:"#00FF88",RECON:"#F5C842",NETWORK:"#00AAFF",MOBILE:"#FF8800",CLOUD:"#44FFAA",TUTORIAL:"#F5C842",AD:"#FF6644"})[c]||"#00C9B1";
 const catIcon   = c => ({WEB:"🌐",CRYPTO:"🔐",FORENSICS:"🔬",PRIVESC:"⬆",OSINT:"🔍",RECON:"📡",NETWORK:"📶",MOBILE:"📱",CLOUD:"☁",TUTORIAL:"🎓",AD:"🏢"})[c]||"◆";
@@ -859,7 +859,12 @@ function CmdBar({onSelect,category,C}) {
 
 function HintPanel({challenge,hintTokens,unlockedHints,penaltyTotal,onSpend,C}) {
   const [confirm,setConfirm]=useState(null);
-  const handle=(tier,cost,penalty)=>{ if(confirm===tier){onSpend(tier,cost,penalty);setConfirm(null);}else{setConfirm(tier);setTimeout(()=>setConfirm(null),3000);}};
+  const confirmTimer=useRef(null);
+  const handle=(tier,cost,penalty)=>{
+    if(confirm===tier){onSpend(tier,cost,penalty);setConfirm(null);clearTimeout(confirmTimer.current);}
+    else{setConfirm(tier);clearTimeout(confirmTimer.current);confirmTimer.current=setTimeout(()=>setConfirm(null),3000);}
+  };
+  useEffect(()=>()=>clearTimeout(confirmTimer.current),[]);
   return (
     <div style={{margin:"0 12px 8px",border:`1px solid ${C.slateHi}`,background:C.bgDeep}}>
       <div style={{display:"flex",justifyContent:"space-between",padding:"8px 12px",borderBottom:`1px solid ${C.slate}`,background:C.bgCard}}>
@@ -1233,19 +1238,19 @@ export default function Darkwing() {
   useEffect(()=>{smartScroll(msnTermRef);},[msnLines]);
   useEffect(()=>{smartScroll(dailyTermRef);},[dailyLines]);
   useEffect(()=>{
-    if(screen==="challenge"){
-      [100,300,600].forEach(t=>setTimeout(()=>{ if(chalInputRef.current){chalInputRef.current.focus();} },t));
-    }
+    if(screen!=="challenge") return;
+    const ts=[100,300,600].map(t=>setTimeout(()=>{ chalInputRef.current?.focus(); },t));
+    return()=>ts.forEach(clearTimeout);
   },[screen,chalStepIdx]);
   useEffect(()=>{
-    if(screen==="mission"){
-      [100,300,600].forEach(t=>setTimeout(()=>{ if(msnInputRef.current){msnInputRef.current.focus();} },t));
-    }
+    if(screen!=="mission") return;
+    const ts=[100,300,600].map(t=>setTimeout(()=>{ msnInputRef.current?.focus(); },t));
+    return()=>ts.forEach(clearTimeout);
   },[screen,msnStepIdx]);
   useEffect(()=>{
-    if(screen==="daily"){
-      [100,300,600].forEach(t=>setTimeout(()=>{ if(dailyInputRef.current){dailyInputRef.current.focus();} },t));
-    }
+    if(screen!=="daily") return;
+    const ts=[100,300,600].map(t=>setTimeout(()=>{ dailyInputRef.current?.focus(); },t));
+    return()=>ts.forEach(clearTimeout);
   },[screen,dailyStepIdx]);
 
   const doGlitch=()=>{setGlitch(true);setTimeout(()=>setGlitch(false),450);};
@@ -1335,6 +1340,7 @@ export default function Darkwing() {
     }
 
     const step=activeChallenge.steps[chalStepIdx];
+    if(!step) return;
     const ok=normalize(raw)===normalize(step.cmd)||(step.aliases||[]).some(a=>normalize(raw)===normalize(a));
     setChalLines(p=>[...p,{type:"prompt",text:raw}]);setChalInput("");
 
@@ -1364,7 +1370,8 @@ export default function Darkwing() {
       const stars=isReplay?calcStars(elapsed,0,chalWrong):calcStars(elapsed,hintsUsedCount,chalWrong);
       const earnedPts=isReplay?0:Math.max(10,activeChallenge.points-hints.penalty);
 
-      if(!isReplay||!(solvedFlags||{})[activeChallenge.id]){
+      if(isReplay) unlockAchievement("replay_1");
+      if(!isReplay&&!(solvedFlags||{})[activeChallenge.id]){
         setSave(prev=>({
           ...prev,
           totalScore:(prev.totalScore||0)+earnedPts,
@@ -1377,11 +1384,9 @@ export default function Darkwing() {
         const newSolved={...(solvedFlags||{}),[activeChallenge.id]:true};
         if(Object.keys(newSolved).length===1) unlockAchievement("first_blood");
         if(Object.keys(newSolved).length===10) unlockAchievement("ten_flags");
-        if(hintsUsedCount===0&&!isReplay){unlockAchievement("no_hints_1");setDuckyMsg(duck("noHints"));}
-        if(elapsed<60&&!isReplay) unlockAchievement("speed_run");
+        if(hintsUsedCount===0){unlockAchievement("no_hints_1");setDuckyMsg(duck("noHints"));}
+        if(elapsed<60) unlockAchievement("speed_run");
         if(stars===3) unlockAchievement("three_stars");
-        if(isReplay) unlockAchievement("replay_1");
-        // Check city cleared
         const city=CITIES_FULL.find(c=>c.challenges.includes(activeChallenge.id));
         if(city&&city.challenges.every(id=>newSolved[id])){
           unlockAchievement("city_clear");
@@ -1415,7 +1420,8 @@ export default function Darkwing() {
     soundEngine.play("enter");haptic.light();
     if(normalize(raw)==="quack"){setDailyLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);setDailyInput("");soundEngine.play("quack");unlockAchievement("quack_found");return;}
     const step=activeDaily.steps[dailyStepIdx];
-    const ok=normalize(raw)===normalize(step.cmd);
+    if(!step) return;
+    const ok=normalize(raw)===normalize(step.cmd)||(step.aliases||[]).some(a=>normalize(raw)===normalize(a));
     setDailyLines(p=>[...p,{type:"prompt",text:raw}]);setDailyInput("");
     if(ok){
       typeLines(step.output.split("\n"),setDailyLines,setDailyTyping,()=>{
@@ -1447,6 +1453,7 @@ export default function Darkwing() {
     soundEngine.play("enter");haptic.light();
     if(normalize(raw)==="quack"){setMsnLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);setMsnInput("");soundEngine.play("quack");unlockAchievement("quack_found");return;}
     const step=activeMission.steps[msnStepIdx];
+    if(!step) return;
     const ok=normalize(raw)===normalize(step.cmd)||(step.aliases||[]).some(a=>normalize(raw)===normalize(a));
     setMsnLines(p=>[...p,{type:"prompt",text:raw}]);setMsnInput("");
     if(ok){
@@ -1700,7 +1707,7 @@ export default function Darkwing() {
       )}
 
       {/* Daily banner */}
-      <div style={{margin:"4px 12px 6px",padding:"9px 13px",background:`${C.purple}22`,border:`1px solid ${C.gold}33`,borderLeft:`3px solid ${C.gold}`,cursor:dailySolved?"default":"pointer",opacity:dailySolved?.6:1}} onClick={()=>{if(!dailySolved){soundEngine.init();soundEngine.play("daily");openDaily();}}}>
+      <div style={{margin:"4px 12px 6px",padding:"9px 13px",background:`${C.purple}22`,border:`1px solid ${C.gold}33`,borderLeft:`3px solid ${C.gold}`,cursor:dailySolved?"default":"pointer",opacity:dailySolved?0.6:1}} onClick={()=>{if(!dailySolved){soundEngine.init();soundEngine.play("daily");openDaily();}}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div>
             <div style={{fontSize:10,color:C.gold,letterSpacing:3,marginBottom:1}}>📅 DAILY CHALLENGE</div>
