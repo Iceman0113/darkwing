@@ -1325,10 +1325,10 @@ export default function Darkwing() {
     const mode=OP_MODES[opMode]||OP_MODES.junior;
     userScrolled.current=false;
     setChalLines([
-      {type:"sys",text:`┌──────────────────────────────────────────┐`},
+      {type:"sys",text:`┌──────────────────────────┐`},
       {type:"sys",text:`  ${chal.title}`},
       {type:"sys",text:`  ${chal.category} · ${chal.points}pts · ${chal.difficulty}`},
-      {type:"sys",text:`└──────────────────────────────────────────┘`},
+      {type:"sys",text:`└──────────────────────────┘`},
       {type:"blank"},{type:"story",text:mode.storyPrefix+" "+chal.story},{type:"blank"},
       {type:"info",text:mode.missionTone},{type:"info",text:chal.description},{type:"blank"},
       {type:"hint",text:`▶ STEP 1: ${chal.steps[0].hint}`},{type:"blank"},
@@ -1419,7 +1419,7 @@ export default function Darkwing() {
   const openDaily=()=>{
     soundEngine.init();soundEngine.play("daily");haptic.medium();
     setActiveDaily(dailyChal);setDailyStepIdx(0);
-    setDailyLines([{type:"sys",text:`┌──────────────────────────────────────────┐`},{type:"sys",text:`  📅 DAILY: ${dailyChal.title} +${dailyChal.bonusXP}XP`},{type:"sys",text:`└──────────────────────────────────────────┘`},{type:"blank"},{type:"story",text:dailyChal.story},{type:"blank"},{type:"hint",text:`▶ ${dailyChal.steps[0].hint}`},{type:"blank"}]);
+    setDailyLines([{type:"sys",text:`┌──────────────────────────┐`},{type:"sys",text:`  📅 DAILY: ${dailyChal.title} +${dailyChal.bonusXP}XP`},{type:"sys",text:`└──────────────────────────┘`},{type:"blank"},{type:"story",text:dailyChal.story},{type:"blank"},{type:"hint",text:`▶ ${dailyChal.steps[0].hint}`},{type:"blank"}]);
     setDailyInput("");setDailyShowFlag(false);setDailyFlagInput("");setDailyFlagResult(null);
     setDuckyMsg(duck("daily"));setScreen("daily");
   };
@@ -1452,7 +1452,7 @@ export default function Darkwing() {
   const openMission=msn=>{
     soundEngine.init();soundEngine.play("navigate");haptic.light();
     setActiveMission(msn);setMsnStepIdx(0);
-    setMsnLines([{type:"sys",text:`┌──────────────────────────────────────────┐`},{type:"sys",text:`  MISSION: ${msn.title}`},{type:"sys",text:`  REWARD: +${msn.xp}XP  +${msn.tokenReward}🪙`},{type:"sys",text:`└──────────────────────────────────────────┘`},{type:"blank"},{type:"info",text:msn.description},{type:"blank"},{type:"hint",text:`▶ STEP 1: ${msn.steps[0].hint}`},{type:"blank"}]);
+    setMsnLines([{type:"sys",text:`┌──────────────────────────┐`},{type:"sys",text:`  MISSION: ${msn.title}`},{type:"sys",text:`  REWARD: +${msn.xp}XP  +${msn.tokenReward}🪙`},{type:"sys",text:`└──────────────────────────┘`},{type:"blank"},{type:"info",text:msn.description},{type:"blank"},{type:"hint",text:`▶ STEP 1: ${msn.steps[0].hint}`},{type:"blank"}]);
     setMsnInput("");setMsnWrong(0);setMsnLesson(false);
     setDuckyMsg(duck("missionStart"));setScreen("mission");
   };
@@ -1498,17 +1498,17 @@ export default function Darkwing() {
 
   // ── STYLES ────────────────────────────────────────────────────────
   const S={
-    root:{fontFamily:"'VT323','Courier New',monospace",background:C.bg,color:C.text,height:"100dvh",maxWidth:520,margin:"0 auto",position:"relative",overflow:"hidden",display:"flex",flexDirection:"column",filter:glitch?"hue-rotate(60deg) brightness(1.6)":"none",transition:"filter .08s"},
+    root:{fontFamily:"'VT323','Courier New',monospace",background:C.bg,color:C.text,width:"100%",height:"100dvh",maxWidth:520,margin:"0 auto",position:"relative",overflow:"hidden",display:"flex",flexDirection:"column",filter:glitch?"hue-rotate(60deg) brightness(1.6)":"none",transition:"filter .08s"},
     scanlines:{position:"fixed",inset:0,zIndex:999,pointerEvents:"none",background:"repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,0,0,0.03) 4px,rgba(0,0,0,0.03) 5px)"},
     vignette:{position:"fixed",inset:0,zIndex:998,pointerEvents:"none",background:"radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.65) 100%)"},
     hdr:{background:C.bgDeep,borderBottom:`2px solid ${C.purple}`,padding:"10px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:20},
-    logo:{fontSize:30,color:C.gold,letterSpacing:5,textShadow:`0 0 18px ${C.gold}99`},
+    logo:{fontSize:22,color:C.gold,letterSpacing:2,textShadow:`0 0 18px ${C.gold}99`},
     tabs:{display:"flex",background:C.bgDeep,borderBottom:`1px solid ${C.purple}`},
     tab:a=>({flex:1,padding:"11px 4px",background:"none",border:"none",fontFamily:"'VT323',monospace",fontSize:17,letterSpacing:1,color:a?C.accent:C.textDim,borderBottom:a?`3px solid ${C.accent}`:"3px solid transparent",cursor:"pointer",transition:"all .15s"}),
     card:(lk,dn)=>({margin:"10px 14px",padding:"14px 16px",border:`1px solid ${dn?C.purple:lk?C.textFade:C.purpleHi}`,borderLeft:`4px solid ${dn?C.accent:lk?C.textFade:C.gold}`,background:lk?C.bgDeep:dn?C.bgCard+"88":C.bgCard,cursor:lk?"not-allowed":"pointer",position:"relative",opacity:lk?0.55:1,transition:"all .2s"}),
     termWrap:{background:C.bgDeep,border:`1px solid ${C.purple}`,borderTop:`3px solid ${C.accent}`,margin:"0 14px 0",display:"flex",flexDirection:"column",flex:1,minHeight:0},
     termBar:{background:C.bgCard,borderBottom:`1px solid ${C.slate}`,padding:"7px 12px",display:"flex",alignItems:"center",gap:8,flexShrink:0},
-    termBody:{padding:"12px 14px",flex:1,minHeight:0,overflowY:"auto",fontSize:16,overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"},
+    termBody:{padding:"12px 14px",flex:1,minHeight:0,overflowY:"auto",overflowX:"hidden",fontSize:16,overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"},
     termInput:{display:"flex",alignItems:"center",gap:8,padding:"8px 14px",borderTop:`1px solid ${C.slate}`,background:C.bgDeep},
     termField:{flex:1,background:"none",border:"none",outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:17,caretColor:C.accent},
     flagBox:{margin:"0 14px 8px",padding:"14px 16px",border:`1px solid ${C.gold}55`,background:C.bgCard,borderLeft:`4px solid ${C.gold}`},
@@ -1542,10 +1542,10 @@ export default function Darkwing() {
 
         <div style={S.hdr}>
           <button style={{...S.btn(),padding:"6px 14px",fontSize:16}} onClick={onBack}>← BACK</button>
-          <div style={{fontSize:14,color:C.textDim,letterSpacing:1}}>{category&&catIcon(category)} {subtitle}</div>
-          <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <div style={{fontSize:13,color:C.textDim,letterSpacing:0,flex:1,minWidth:0,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",textAlign:"center",padding:"0 6px"}}>{category&&catIcon(category)} {subtitle}</div>
+          <div style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
             {replay&&<span style={{fontSize:14,color:C.gold,border:`1px solid ${C.gold}55`,padding:"2px 8px"}}>🔁 REPLAY</span>}
-            <span style={{fontSize:19,color:C.gold}}>{xpLabel}</span>
+            <span style={{fontSize:17,color:C.gold}}>{xpLabel}</span>
           </div>
         </div>
 
@@ -1681,16 +1681,16 @@ export default function Darkwing() {
       <RankUpModal rank={rankUpData} onClose={()=>setRankUpData(null)} C={C}/>
 
       <div style={S.hdr}>
-        <div>
+        <div style={{minWidth:0}}>
           <div style={S.logo}>🦆 DARKWING</div>
-          <div style={{fontSize:12,color:C.accent,letterSpacing:3}}>LET'S GET DANGEROUS</div>
+          <div style={{fontSize:11,color:C.accent,letterSpacing:1}}>LET'S GET DANGEROUS</div>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:10}}>
+        <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
           <div style={{textAlign:"right"}}>
-            <div style={{fontSize:17,color:rank.color,letterSpacing:1}}>{rank.icon} {rank.label}</div>
-            <div style={{fontSize:14,color:C.gold}}>{hintTokens||0}🪙 · {totalXP||0}XP</div>
+            <div style={{fontSize:13,color:rank.color}}>{rank.icon} {totalXP||0}XP</div>
+            <div style={{fontSize:12,color:C.gold}}>{hintTokens||0}🪙</div>
           </div>
-          <button onClick={()=>{soundEngine.init();soundEngine.play("navigate");haptic.light();setScreen("settings");unlockAchievement("settings_found");}} style={{background:"none",border:`1px solid ${C.slateHi}`,color:C.textDim,fontSize:22,padding:"5px 10px",cursor:"pointer",fontFamily:"'VT323',monospace"}}>⚙</button>
+          <button onClick={()=>{soundEngine.init();soundEngine.play("navigate");haptic.light();setScreen("settings");unlockAchievement("settings_found");}} style={{background:"none",border:`1px solid ${C.slateHi}`,color:C.textDim,fontSize:20,padding:"4px 8px",cursor:"pointer",fontFamily:"'VT323',monospace"}}>⚙</button>
         </div>
       </div>
 
