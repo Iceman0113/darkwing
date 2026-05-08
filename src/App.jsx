@@ -236,7 +236,7 @@ const CTF_CHALLENGES = [
   {id:"tut01",category:"TUTORIAL",city:"stcanard",title:"DARKWING BOOT CAMP",tier:1,points:25,difficulty:"EASY",requires:[],
     description:"Welcome operative. Run your first recon command.",story:"Ducky's training environment in St. Canard. This is where every operative begins.",
     hints:[{tier:1,text:"Type the command in the hint strip below."},{tier:2,text:"whoami tells you who you are on the system."},{tier:3,text:"whoami — press Enter."}],
-    steps:[{cmd:"whoami",hint:"Check your user identity",output:`darkwing_operative\n\n[*] Identity confirmed. Welcome, operative.\n[*] Let's get dangerous.`},{cmd:"ls -la /missions",hint:"List mission files",output:`-rw-r--r-- mission_01.txt\n-rw-r--r-- negaduck_intercept.enc\n-rw-r--r-- flag.txt\n\n[*] NegaDuck intercept detected. Investigate.`}],
+    steps:[{cmd:"whoami",hint:"Check your user identity",output:`darkwing_operative\n\n[*] Identity confirmed. Welcome, operative.\n[*] Let's get dangerous.`},{cmd:"ls -la /missions",hint:"List mission files",output:`-rw-r--r-- mission_01.txt\n-rw-r--r-- negaduck_intercept.enc\n-rw-r--r-- flag.txt\n\n[*] NegaDuck intercept detected. Investigate.`},{cmd:"cat /missions/flag.txt",hint:"Read the flag file",aliases:["cat flag.txt","cat /missions/flag.txt"],output:`CTF{w3lc0m3_t0_d4rkw1ng}\n\n[!!!] FLAG CAPTURED — Submit it above to complete the mission.`}],
     flag:"CTF{w3lc0m3_t0_d4rkw1ng}",lesson:"Always know your environment. whoami, id, uname -a — run these first on every new shell.",tags:["tutorial"]},
 
   {id:"xss01",category:"WEB",city:"stcanard",title:"SCRIPT INJECTION",tier:2,points:100,difficulty:"EASY",requires:["tut01"],
