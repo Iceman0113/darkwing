@@ -9,30 +9,30 @@ import { useState, useEffect, useRef, useCallback } from "react";
 const THEMES = {
   darkops: {
     id:"darkops", name:"DARK OPS", icon:"🦇", desc:"Purple / Teal / Gold",
-    bg:"#0D0D1A", bgCard:"#12122A", bgDeep:"#080812",
-    purple:"#2D1B69", purpleHi:"#4A2C8F", purpleDim:"#1A1030",
-    teal:"#00C9B1", gold:"#F5C842", slate:"#1A1A2E", slateHi:"#252545",
-    text:"#C8C8E8", textDim:"#4A4A7A", textFade:"#2A2A4A",
-    red:"#FF4466", green:"#00FF88", accent:"#00C9B1", accentAlt:"#F5C842",
-    termPrompt:"#00C9B1", termOutput:"#B8D8C8",
+    bg:"#0A0A18", bgCard:"#11112A", bgDeep:"#060610",
+    purple:"#3A2480", purpleHi:"#5A3CAF", purpleDim:"#1A1038",
+    teal:"#00DEC4", gold:"#F7CC44", slate:"#1C1C36", slateHi:"#2E2E52",
+    text:"#E4E4F8", textDim:"#9090C4", textFade:"#5555A0",
+    red:"#FF4466", green:"#00FF88", accent:"#00DEC4", accentAlt:"#F7CC44",
+    termPrompt:"#00DEC4", termOutput:"#CCEADD",
   },
   negaduck: {
     id:"negaduck", name:"NEGADUCK", icon:"🦹", desc:"Red / Black / Yellow",
-    bg:"#0F0505", bgCard:"#1A0808", bgDeep:"#080202",
-    purple:"#6B0000", purpleHi:"#8F1010", purpleDim:"#300505",
-    teal:"#FFD700", gold:"#FF4400", slate:"#2A0808", slateHi:"#3A1010",
-    text:"#E8C8C8", textDim:"#7A3A3A", textFade:"#3A1A1A",
-    red:"#FF2200", green:"#FFD700", accent:"#FF4400", accentAlt:"#FFD700",
-    termPrompt:"#FF4400", termOutput:"#E8C0B0",
+    bg:"#100404", bgCard:"#1E0808", bgDeep:"#090202",
+    purple:"#7A0000", purpleHi:"#A01414", purpleDim:"#380606",
+    teal:"#FFD700", gold:"#FF5500", slate:"#2E0808", slateHi:"#441414",
+    text:"#F0D0D0", textDim:"#C07070", textFade:"#804040",
+    red:"#FF2200", green:"#FFD700", accent:"#FF5500", accentAlt:"#FFD700",
+    termPrompt:"#FF5500", termOutput:"#EED0C0",
   },
   stcanard: {
     id:"stcanard", name:"ST. CANARD DAY", icon:"☀", desc:"Light comic book",
-    bg:"#F0EEF8", bgCard:"#FFFFFF", bgDeep:"#E8E4F4",
+    bg:"#EDEAF8", bgCard:"#FFFFFF", bgDeep:"#E4DFF4",
     purple:"#5B3FD4", purpleHi:"#7B5FE4", purpleDim:"#D4CCEE",
-    teal:"#008B7A", gold:"#C47A00", slate:"#E0DCF0", slateHi:"#D0CCEC",
-    text:"#1A1040", textDim:"#6A609A", textFade:"#B0A8CC",
-    red:"#CC0033", green:"#007755", accent:"#008B7A", accentAlt:"#C47A00",
-    termPrompt:"#5B3FD4", termOutput:"#2A2060",
+    teal:"#007A6C", gold:"#B86E00", slate:"#D8D4F0", slateHi:"#C8C4EC",
+    text:"#14083C", textDim:"#5A5090", textFade:"#9890C0",
+    red:"#CC0033", green:"#006644", accent:"#007A6C", accentAlt:"#B86E00",
+    termPrompt:"#5B3FD4", termOutput:"#201860",
   },
 };
 
@@ -443,37 +443,37 @@ function BriefingRoom({challenge, opMode, onStart, onBack, C}) {
       <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"/>
 
       <div style={{background:C.bgDeep,borderBottom:`1px solid ${C.purple}`,padding:"8px 13px",display:"flex",alignItems:"center",gap:12,position:"sticky",top:0,zIndex:10}}>
-        <button onClick={onBack} style={{background:"none",border:`1px solid ${C.accent}`,color:C.accent,fontFamily:"'VT323',monospace",fontSize:13,padding:"4px 10px",cursor:"pointer"}}>← BACK</button>
+        <button onClick={onBack} style={{background:"none",border:`1px solid ${C.accent}`,color:C.accent,fontFamily:"'VT323',monospace",fontSize:16,padding:"6px 14px",cursor:"pointer"}}>← BACK</button>
         <div>
-          <div style={{fontSize:13,color:C.gold,letterSpacing:3}}>📋 MISSION BRIEFING</div>
-          <div style={{fontSize:10,color:C.textDim,letterSpacing:2}}>{challenge.city?.toUpperCase()} · {challenge.category}</div>
+          <div style={{fontSize:17,color:C.gold,letterSpacing:3}}>📋 MISSION BRIEFING</div>
+          <div style={{fontSize:13,color:C.textDim,letterSpacing:2}}>{challenge.city?.toUpperCase()} · {challenge.category}</div>
         </div>
       </div>
 
       {/* Challenge header */}
-      <div style={{padding:"14px 16px",borderBottom:`1px solid ${C.slate}`,background:C.bgCard}}>
-        <div style={{fontSize:11,color:catColor(challenge.category),letterSpacing:3,marginBottom:4}}>{catIcon(challenge.category)} {challenge.category}</div>
-        <div style={{fontSize:20,color:C.text,letterSpacing:1,marginBottom:4}}>{challenge.title}</div>
-        <div style={{display:"flex",gap:10,alignItems:"center"}}>
-          <span style={{fontSize:12,color:diffColor(challenge.difficulty)}}>{challenge.difficulty}</span>
-          <span style={{fontSize:12,color:C.textDim}}>{challenge.points} pts</span>
-          <span style={{fontSize:12,color:C.textDim}}>{challenge.steps.length} step{challenge.steps.length!==1?"s":""}</span>
+      <div style={{padding:"16px 18px",borderBottom:`1px solid ${C.slate}`,background:C.bgCard}}>
+        <div style={{fontSize:14,color:catColor(challenge.category),letterSpacing:3,marginBottom:5}}>{catIcon(challenge.category)} {challenge.category}</div>
+        <div style={{fontSize:24,color:C.text,letterSpacing:1,marginBottom:6}}>{challenge.title}</div>
+        <div style={{display:"flex",gap:12,alignItems:"center"}}>
+          <span style={{fontSize:15,color:diffColor(challenge.difficulty)}}>{challenge.difficulty}</span>
+          <span style={{fontSize:15,color:C.textDim}}>{challenge.points} pts</span>
+          <span style={{fontSize:15,color:C.textDim}}>{challenge.steps.length} step{challenge.steps.length!==1?"s":""}</span>
         </div>
       </div>
 
       {/* NegaDuck intel */}
-      <div style={{margin:"12px 14px 0",padding:"10px 12px",background:"rgba(255,68,102,0.06)",border:"1px solid rgba(255,68,102,0.2)",borderLeft:"3px solid #FF4466"}}>
-        <div style={{fontSize:10,color:"#FF4466",letterSpacing:3,marginBottom:4}}>{mode.negaDuckName||"NEGADUCK"} — INTEL</div>
-        <div style={{fontSize:14,color:"#CC8888",lineHeight:1.6,fontStyle:"italic"}}>
+      <div style={{margin:"14px 16px 0",padding:"12px 14px",background:"rgba(255,68,102,0.07)",border:"1px solid rgba(255,68,102,0.25)",borderLeft:"4px solid #FF4466"}}>
+        <div style={{fontSize:13,color:"#FF4466",letterSpacing:3,marginBottom:5}}>{mode.negaDuckName||"NEGADUCK"} — INTEL</div>
+        <div style={{fontSize:16,color:"#DDA0A0",lineHeight:1.6,fontStyle:"italic"}}>
           "{mode.negaLines[Math.floor(Date.now()/60000)%mode.negaLines.length]}"
         </div>
       </div>
 
       {/* Ducky briefing typewriter */}
-      <div style={{margin:"12px 14px",padding:"14px",background:`${C.purple}22`,border:`1px solid ${C.purpleHi}`,borderLeft:`3px solid ${C.gold}`,flex:1}}>
-        <div style={{fontSize:11,color:C.gold,letterSpacing:3,marginBottom:10}}>🦆 {mode.briefingPrefix}</div>
+      <div style={{margin:"14px 16px",padding:"16px",background:`${C.purple}28`,border:`1px solid ${C.purpleHi}`,borderLeft:`4px solid ${C.gold}`,flex:1}}>
+        <div style={{fontSize:14,color:C.gold,letterSpacing:3,marginBottom:12}}>🦆 {mode.briefingPrefix}</div>
         {lines.map((l,i)=>(
-          <div key={i} style={{fontSize:14,color:C.text,lineHeight:1.7,marginBottom:6}}>
+          <div key={i} style={{fontSize:17,color:C.text,lineHeight:1.7,marginBottom:8}}>
             {l?.text}
             {l&&!l.final&&<span style={{animation:"blink .6s infinite"}}>█</span>}
           </div>
@@ -481,22 +481,22 @@ function BriefingRoom({challenge, opMode, onStart, onBack, C}) {
       </div>
 
       {/* Objective */}
-      <div style={{margin:"0 14px 12px",padding:"12px",background:C.bgCard,border:`1px solid ${C.slate}`,borderLeft:`3px solid ${C.accent}`}}>
-        <div style={{fontSize:11,color:C.accent,letterSpacing:3,marginBottom:6}}>{mode.missionTone}</div>
-        <div style={{fontSize:13,color:C.textDim,lineHeight:1.5}}>{challenge.description}</div>
+      <div style={{margin:"0 16px 14px",padding:"14px",background:C.bgCard,border:`1px solid ${C.slateHi}`,borderLeft:`4px solid ${C.accent}`}}>
+        <div style={{fontSize:14,color:C.accent,letterSpacing:3,marginBottom:8}}>{mode.missionTone}</div>
+        <div style={{fontSize:16,color:C.textDim,lineHeight:1.6}}>{challenge.description}</div>
       </div>
 
       {/* Hint preview */}
-      <div style={{margin:"0 14px 16px",padding:"10px 12px",background:C.bgDeep,border:`1px solid ${C.slate}`}}>
-        <div style={{fontSize:11,color:C.textDim,letterSpacing:2,marginBottom:4}}>TOOLS LIKELY NEEDED</div>
-        <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
-          {challenge.tags.map(t=><span key={t} style={{fontSize:10,color:catColor(challenge.category),border:`1px solid ${catColor(challenge.category)}33`,padding:"0 6px"}}>{t}</span>)}
+      <div style={{margin:"0 16px 18px",padding:"12px 14px",background:C.bgDeep,border:`1px solid ${C.slateHi}`}}>
+        <div style={{fontSize:14,color:C.textDim,letterSpacing:2,marginBottom:6}}>TOOLS LIKELY NEEDED</div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+          {challenge.tags.map(t=><span key={t} style={{fontSize:13,color:catColor(challenge.category),border:`1px solid ${catColor(challenge.category)}44`,padding:"1px 8px"}}>{t}</span>)}
         </div>
       </div>
 
-      <div style={{padding:"0 14px 24px"}}>
+      <div style={{padding:"0 16px 28px"}}>
         <button disabled={!done} onClick={onStart}
-          style={{width:"100%",padding:"14px",fontSize:20,letterSpacing:4,fontFamily:"'VT323',monospace",cursor:done?"pointer":"not-allowed",background:done?C.accent:"transparent",border:`2px solid ${done?C.accent:C.textFade}`,color:done?"#000":C.textFade,transition:"all .3s",animation:done?"pulse 1.5s infinite":"none"}}>
+          style={{width:"100%",padding:"16px",fontSize:24,letterSpacing:4,fontFamily:"'VT323',monospace",cursor:done?"pointer":"not-allowed",background:done?C.accent:"transparent",border:`2px solid ${done?C.accent:C.textFade}`,color:done?"#000":C.textFade,transition:"all .3s",animation:done?"pulse 1.5s infinite":"none"}}>
           {done?"BEGIN MISSION ▶":"RECEIVING INTEL..."}
         </button>
       </div>
@@ -804,10 +804,10 @@ function RankUpModal({rank,onClose,C}) {
     <div style={{position:"fixed",inset:0,zIndex:200,background:"rgba(0,0,0,0.92)",display:"flex",alignItems:"center",justifyContent:"center"}}>
       <div style={{background:C.bgCard,border:`2px solid ${rank.color}`,padding:"32px 24px",textAlign:"center",maxWidth:320,margin:"0 16px",animation:"rankUp .5s cubic-bezier(0.34,1.56,0.64,1)",boxShadow:`0 0 40px ${rank.color}44`}}>
         <div style={{fontSize:60,marginBottom:10,animation:"spin 1s ease"}}>{rank.icon}</div>
-        <div style={{fontSize:11,color:C.textDim,letterSpacing:4,marginBottom:6}}>RANK UNLOCKED</div>
-        <div style={{fontSize:26,color:rank.color,letterSpacing:4,textShadow:`0 0 20px ${rank.color}`,marginBottom:10}}>{rank.label}</div>
-        <div style={{fontSize:13,color:C.accent,marginBottom:20}}>🦆 "{duck("rankUp")}"</div>
-        <button onClick={onClose} style={{padding:"12px 28px",background:rank.color,border:"none",color:"#000",fontFamily:"'VT323',monospace",fontSize:18,letterSpacing:3,cursor:"pointer"}}>
+        <div style={{fontSize:14,color:C.textDim,letterSpacing:4,marginBottom:8}}>RANK UNLOCKED</div>
+        <div style={{fontSize:30,color:rank.color,letterSpacing:4,textShadow:`0 0 24px ${rank.color}`,marginBottom:12}}>{rank.label}</div>
+        <div style={{fontSize:16,color:C.accent,marginBottom:24}}>🦆 "{duck("rankUp")}"</div>
+        <button onClick={onClose} style={{padding:"14px 32px",background:rank.color,border:"none",color:"#000",fontFamily:"'VT323',monospace",fontSize:22,letterSpacing:3,cursor:"pointer"}}>
           LET'S GET DANGEROUS
         </button>
       </div>
@@ -821,12 +821,12 @@ function AchToast({id,onDone,C}) {
   if(!id) return null;
   const def=ACH_DEFS.find(a=>a.id===id); if(!def) return null;
   return (
-    <div style={{position:"fixed",top:68,left:12,right:12,zIndex:300,background:C.bgCard,border:`1px solid ${C.gold}`,borderLeft:`4px solid ${C.gold}`,padding:"10px 14px",display:"flex",alignItems:"center",gap:12,animation:"slideDown .4s ease",boxShadow:`0 4px 20px ${C.gold}22`}}>
-      <div style={{fontSize:26}}>{def.icon}</div>
+    <div style={{position:"fixed",top:76,left:14,right:14,zIndex:300,background:C.bgCard,border:`1px solid ${C.gold}`,borderLeft:`4px solid ${C.gold}`,padding:"12px 16px",display:"flex",alignItems:"center",gap:14,animation:"slideDown .4s ease",boxShadow:`0 4px 24px ${C.gold}33`}}>
+      <div style={{fontSize:32}}>{def.icon}</div>
       <div style={{flex:1}}>
-        <div style={{fontSize:10,color:C.gold,letterSpacing:3}}>ACHIEVEMENT UNLOCKED</div>
-        <div style={{fontSize:15,color:C.text}}>{def.label}</div>
-        <div style={{fontSize:11,color:C.textDim}}>{def.desc} · +{def.xp}XP</div>
+        <div style={{fontSize:13,color:C.gold,letterSpacing:3}}>ACHIEVEMENT UNLOCKED</div>
+        <div style={{fontSize:19,color:C.text}}>{def.label}</div>
+        <div style={{fontSize:14,color:C.textDim}}>{def.desc} · +{def.xp}XP</div>
       </div>
     </div>
   );
@@ -846,10 +846,10 @@ function CmdBar({onSelect,category,C}) {
     return true;
   }).slice(0,12);
   return (
-    <div style={{display:"flex",overflowX:"auto",gap:5,padding:"5px 10px",background:C.bgDeep,borderTop:`1px solid ${C.slate}`,flexShrink:0}}>
+    <div style={{display:"flex",overflowX:"auto",gap:6,padding:"7px 12px",background:C.bgDeep,borderTop:`1px solid ${C.slate}`,flexShrink:0}}>
       {rel.map(cmd=>(
         <button key={cmd} onClick={()=>{onSelect(cmd+" ");soundEngine.play("keypress");haptic.light();}}
-          style={{padding:"4px 9px",fontSize:11,fontFamily:"'VT323',monospace",whiteSpace:"nowrap",background:C.bgCard,border:`1px solid ${C.slate}`,color:C.textDim,cursor:"pointer",flexShrink:0}}>
+          style={{padding:"5px 12px",fontSize:14,fontFamily:"'VT323',monospace",whiteSpace:"nowrap",background:C.bgCard,border:`1px solid ${C.slateHi}`,color:C.textDim,cursor:"pointer",flexShrink:0}}>
           {cmd}
         </button>
       ))}
@@ -866,27 +866,27 @@ function HintPanel({challenge,hintTokens,unlockedHints,penaltyTotal,onSpend,C}) 
   };
   useEffect(()=>()=>clearTimeout(confirmTimer.current),[]);
   return (
-    <div style={{margin:"0 12px 8px",border:`1px solid ${C.slateHi}`,background:C.bgDeep}}>
-      <div style={{display:"flex",justifyContent:"space-between",padding:"8px 12px",borderBottom:`1px solid ${C.slate}`,background:C.bgCard}}>
-        <span style={{fontSize:13,color:C.gold,letterSpacing:3}}>⚡ HINTS</span>
-        <span style={{fontSize:15,color:C.gold}}>{hintTokens}🪙</span>
+    <div style={{margin:"0 14px 10px",border:`1px solid ${C.slateHi}`,background:C.bgDeep}}>
+      <div style={{display:"flex",justifyContent:"space-between",padding:"10px 14px",borderBottom:`1px solid ${C.slate}`,background:C.bgCard}}>
+        <span style={{fontSize:17,color:C.gold,letterSpacing:3}}>⚡ HINTS</span>
+        <span style={{fontSize:19,color:C.gold}}>{hintTokens}🪙</span>
       </div>
-      {penaltyTotal>0&&<div style={{padding:"4px 12px",background:"rgba(255,68,102,0.08)",fontSize:11,color:"#FF4466",letterSpacing:2}}>⚠ PENALTY: -{penaltyTotal}pts</div>}
-      <div style={{padding:"8px 10px"}}>
+      {penaltyTotal>0&&<div style={{padding:"6px 14px",background:"rgba(255,68,102,0.10)",fontSize:14,color:"#FF4466",letterSpacing:2}}>⚠ PENALTY: -{penaltyTotal}pts</div>}
+      <div style={{padding:"10px 12px"}}>
         {HINT_TIERS.map(({tier,label,cost,color,penalty})=>{
           const unlocked=unlockedHints.includes(tier);
           const hint=challenge.hints?.find(h=>h.tier===tier);
           if(!hint) return null;
           return (
-            <div key={tier} style={{marginBottom:6,padding:"9px 11px",border:`1px solid ${unlocked?color+"55":C.slate}`,background:unlocked?color+"0A":C.bgCard}}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:unlocked?6:0}}>
-                <span style={{fontSize:11,color,letterSpacing:2,border:`1px solid ${color}33`,padding:"1px 6px"}}>{unlocked?"✓":"T"+tier} {label}</span>
+            <div key={tier} style={{marginBottom:8,padding:"11px 13px",border:`1px solid ${unlocked?color+"66":C.slateHi}`,background:unlocked?color+"0E":C.bgCard}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:unlocked?8:0}}>
+                <span style={{fontSize:14,color,letterSpacing:2,border:`1px solid ${color}44`,padding:"2px 8px"}}>{unlocked?"✓":"T"+tier} {label}</span>
                 {!unlocked&&<button onClick={()=>handle(tier,cost,penalty)} disabled={hintTokens<cost}
-                  style={{padding:"3px 10px",fontSize:11,fontFamily:"'VT323',monospace",cursor:hintTokens<cost?"not-allowed":"pointer",background:confirm===tier?color:"transparent",border:`1px solid ${hintTokens<cost?C.textFade:color}`,color:confirm===tier?"#000":hintTokens<cost?C.textFade:color}}>
+                  style={{padding:"5px 14px",fontSize:14,fontFamily:"'VT323',monospace",cursor:hintTokens<cost?"not-allowed":"pointer",background:confirm===tier?color:"transparent",border:`1px solid ${hintTokens<cost?C.textFade:color}`,color:confirm===tier?"#000":hintTokens<cost?C.textFade:color}}>
                   {confirm===tier?"CONFIRM?":`${cost}🪙 -${penalty}pts`}
                 </button>}
               </div>
-              {unlocked&&<div style={{fontSize:12,color:C.text,lineHeight:1.6}}>{hint.text}</div>}
+              {unlocked&&<div style={{fontSize:15,color:C.text,lineHeight:1.65}}>{hint.text}</div>}
             </div>
           );
         })}
@@ -901,11 +901,11 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
   const sc={cleared:C.teal,active:C.gold,locked:C.textFade,available:C.purple,empty:C.textFade};
   return (
     <div style={{paddingBottom:16}}>
-      <div style={{margin:"8px 12px",padding:"10px 14px",background:"rgba(255,68,102,0.06)",border:"1px solid rgba(255,68,102,0.2)",borderLeft:"3px solid #FF4466",display:"flex",gap:10,alignItems:"flex-start"}}>
-        <div style={{fontSize:18,flexShrink:0}}>🦹</div>
+      <div style={{margin:"10px 14px",padding:"12px 16px",background:"rgba(255,68,102,0.07)",border:"1px solid rgba(255,68,102,0.25)",borderLeft:"4px solid #FF4466",display:"flex",gap:12,alignItems:"flex-start"}}>
+        <div style={{fontSize:24,flexShrink:0}}>🦹</div>
         <div>
-          <div style={{fontSize:10,color:"#FF4466",letterSpacing:3,marginBottom:3}}>NEGADUCK INTERCEPT</div>
-          <div style={{fontSize:14,color:"#CC8888",lineHeight:1.6,fontStyle:"italic"}}>"{mode.negaLines[Math.floor(Date.now()/30000)%mode.negaLines.length]}"</div>
+          <div style={{fontSize:13,color:"#FF4466",letterSpacing:3,marginBottom:4}}>NEGADUCK INTERCEPT</div>
+          <div style={{fontSize:16,color:"#DDA0A0",lineHeight:1.6,fontStyle:"italic"}}>"{mode.negaLines[Math.floor(Date.now()/30000)%mode.negaLines.length]}"</div>
         </div>
       </div>
       <div style={{margin:"8px 12px",position:"relative",minHeight:220,background:`linear-gradient(135deg,${C.bgDeep} 0%,${C.purple}22 50%,${C.bgDeep} 100%)`,border:`2px solid ${C.purple}`,overflow:"hidden"}}>
@@ -914,7 +914,7 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
           {[20,40,60,80].map(y=><line key={"h"+y} x1="0%" y1={`${y}%`} x2="100%" y2={`${y}%`} stroke={C.teal} strokeWidth="0.5"/>)}
           {[20,40,60,80].map(x=><line key={"v"+x} x1={`${x}%`} y1="0%" x2={`${x}%`} y2="100%" stroke={C.teal} strokeWidth="0.5"/>)}
         </svg>
-        <div style={{position:"absolute",top:6,left:10,fontSize:12,color:C.textDim,letterSpacing:2,zIndex:2}}>DARKWING OPS MAP — 7 TARGETS</div>
+        <div style={{position:"absolute",top:8,left:12,fontSize:14,color:C.textDim,letterSpacing:2,zIndex:2}}>DARKWING OPS MAP — 7 TARGETS</div>
         {CITIES_FULL.map(city=>{
           const st=getCityStatus(city,solvedFlags); const col=sc[st]; const isH=hovered===city.id;
           return (
@@ -923,10 +923,10 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
               onMouseEnter={()=>{setHovered(city.id);soundEngine.play("navigate");}}
               onMouseLeave={()=>setHovered(null)}>
               {st==="active"&&<div style={{position:"absolute",inset:-8,borderRadius:"50%",border:`1px solid ${col}`,animation:"pingRing 2s infinite",opacity:0.5}}/>}
-              <div style={{width:40,height:40,borderRadius:"50%",background:C.bgCard,border:`2px solid ${col}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,boxShadow:isH?`0 0 14px ${col}`:"none",transition:"all .2s",transform:isH?"scale(1.2)":"scale(1)"}}>
+              <div style={{width:48,height:48,borderRadius:"50%",background:C.bgCard,border:`2px solid ${col}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,boxShadow:isH?`0 0 18px ${col}`:"none",transition:"all .2s",transform:isH?"scale(1.2)":"scale(1)"}}>
                 {city.flag}
               </div>
-              <div style={{position:"absolute",top:42,left:"50%",transform:"translateX(-50%)",whiteSpace:"nowrap",fontSize:11,color:col,letterSpacing:1,background:C.bgDeep+"CC",padding:"2px 6px"}}>{city.name.toUpperCase()}</div>
+              <div style={{position:"absolute",top:50,left:"50%",transform:"translateX(-50%)",whiteSpace:"nowrap",fontSize:13,color:col,letterSpacing:1,background:C.bgDeep+"DD",padding:"2px 8px"}}>{city.name.toUpperCase()}</div>
               <div style={{position:"absolute",top:-2,right:-2,width:8,height:8,borderRadius:"50%",background:col,boxShadow:`0 0 4px ${col}`}}/>
             </div>
           );
@@ -937,21 +937,21 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
         const st=getCityStatus(city,solvedFlags); const col=sc[st];
         const done=city.challenges.filter(id=>solvedFlags?.[id]).length;
         return (
-          <div style={{margin:"0 12px 8px",padding:"10px 14px",background:C.bgCard,border:`1px solid ${col}44`,borderLeft:`3px solid ${col}`,animation:"fadeIn .2s ease"}}>
-            <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
-              <div style={{fontSize:16,color:col}}>{city.flag} {city.name}</div>
-              <div style={{fontSize:11,color:col,border:`1px solid ${col}44`,padding:"1px 6px"}}>{st.toUpperCase()}</div>
+          <div style={{margin:"0 14px 10px",padding:"12px 16px",background:C.bgCard,border:`1px solid ${col}55`,borderLeft:`4px solid ${col}`,animation:"fadeIn .2s ease"}}>
+            <div style={{display:"flex",justifyContent:"space-between",marginBottom:5}}>
+              <div style={{fontSize:20,color:col}}>{city.flag} {city.name}</div>
+              <div style={{fontSize:14,color:col,border:`1px solid ${col}55`,padding:"2px 8px"}}>{st.toUpperCase()}</div>
             </div>
-            <div style={{fontSize:11,color:C.textDim,marginBottom:3}}>{city.category}</div>
-            <div style={{fontSize:11,color:col}}>{done}/{city.challenges.length} challenges captured</div>
+            <div style={{fontSize:14,color:C.textDim,marginBottom:4}}>{city.category}</div>
+            <div style={{fontSize:15,color:col}}>{done}/{city.challenges.length} challenges captured</div>
           </div>
         );
       })()}
       <div style={{display:"flex",gap:12,padding:"0 14px",flexWrap:"wrap"}}>
         {[{c:C.teal,l:"CLEARED"},{c:C.gold,l:"IN PROGRESS"},{c:C.purple,l:"AVAILABLE"},{c:C.textFade,l:"LOCKED"}].map(({c,l})=>(
-          <div key={l} style={{display:"flex",alignItems:"center",gap:4}}>
-            <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
-            <span style={{fontSize:12,color:C.textDim,letterSpacing:1}}>{l}</span>
+          <div key={l} style={{display:"flex",alignItems:"center",gap:5}}>
+            <div style={{width:10,height:10,borderRadius:"50%",background:c,boxShadow:`0 0 4px ${c}`}}/>
+            <span style={{fontSize:14,color:C.textDim,letterSpacing:1}}>{l}</span>
           </div>
         ))}
       </div>
@@ -972,8 +972,8 @@ function SettingsScreen({save,onUpdate,onBack,onReset,C}) {
   const updS=(k,v)=>{soundEngine.play("navigate");haptic.light();onUpdate("settings",{...save.settings,[k]:v});};
 
   const row=(label,sub,control)=>(
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0",borderBottom:`1px solid ${C.slate}`}}>
-      <div><div style={{fontSize:14,color:C.text,letterSpacing:1}}>{label}</div>{sub&&<div style={{fontSize:11,color:C.textDim,marginTop:2}}>{sub}</div>}</div>
+    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"14px 0",borderBottom:`1px solid ${C.slate}`}}>
+      <div><div style={{fontSize:17,color:C.text,letterSpacing:1}}>{label}</div>{sub&&<div style={{fontSize:14,color:C.textDim,marginTop:3}}>{sub}</div>}</div>
       {control}
     </div>
   );
@@ -986,16 +986,16 @@ function SettingsScreen({save,onUpdate,onBack,onReset,C}) {
   return (
     <div style={{fontFamily:"'VT323',monospace",background:C.bg,color:C.text,minHeight:"100vh",maxWidth:480,margin:"0 auto"}}>
       <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"/>
-      <div style={{background:C.bgDeep,borderBottom:`1px solid ${C.purple}`,padding:"8px 13px",display:"flex",alignItems:"center",gap:12,position:"sticky",top:0,zIndex:10}}>
-        <button onClick={onBack} style={{background:"none",border:`1px solid ${C.accent}`,color:C.accent,fontFamily:"'VT323',monospace",fontSize:13,padding:"4px 10px",cursor:"pointer"}}>← BACK</button>
-        <div style={{fontSize:20,color:C.gold,letterSpacing:4}}>⚙ SETTINGS</div>
+      <div style={{background:C.bgDeep,borderBottom:`2px solid ${C.purple}`,padding:"10px 16px",display:"flex",alignItems:"center",gap:12,position:"sticky",top:0,zIndex:10}}>
+        <button onClick={onBack} style={{background:"none",border:`1px solid ${C.accent}`,color:C.accent,fontFamily:"'VT323',monospace",fontSize:16,padding:"6px 14px",cursor:"pointer"}}>← BACK</button>
+        <div style={{fontSize:24,color:C.gold,letterSpacing:4}}>⚙ SETTINGS</div>
       </div>
 
-      <div style={{padding:"0 14px 40px"}}>
+      <div style={{padding:"0 16px 40px"}}>
         {/* OPERATIVE */}
-        <div style={{fontSize:11,color:C.accent,letterSpacing:4,margin:"16px 0 6px",paddingBottom:4,borderBottom:`1px solid ${C.purpleHi}`}}>OPERATIVE</div>
-        <div style={{padding:"12px 0",borderBottom:`1px solid ${C.slate}`}}>
-          <div style={{fontSize:14,color:C.text,letterSpacing:1,marginBottom:8}}>CALLSIGN</div>
+        <div style={{fontSize:14,color:C.accent,letterSpacing:4,margin:"18px 0 8px",paddingBottom:5,borderBottom:`1px solid ${C.purpleHi}`}}>OPERATIVE</div>
+        <div style={{padding:"14px 0",borderBottom:`1px solid ${C.slate}`}}>
+          <div style={{fontSize:17,color:C.text,letterSpacing:1,marginBottom:10}}>CALLSIGN</div>
           <div style={{display:"flex",gap:8}}>
             <input value={handleEdit} onChange={e=>setHandleEdit(e.target.value.toUpperCase())}
               style={{flex:1,background:C.bgDeep,border:`1px solid ${C.purpleHi}`,borderBottom:`2px solid ${C.accent}`,outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:16,padding:"8px 10px",caretColor:C.accent,boxSizing:"border-box"}}
@@ -1008,32 +1008,32 @@ function SettingsScreen({save,onUpdate,onBack,onReset,C}) {
         </div>
 
         {/* Mode toggle — KEY NEW FEATURE */}
-        <div style={{padding:"12px 0",borderBottom:`1px solid ${C.slate}`}}>
-          <div style={{fontSize:14,color:C.text,letterSpacing:1,marginBottom:4}}>OPERATIVE MODE</div>
-          <div style={{fontSize:11,color:C.textDim,marginBottom:10}}>Controls NegaDuck's tone and mission briefing style</div>
+        <div style={{padding:"14px 0",borderBottom:`1px solid ${C.slate}`}}>
+          <div style={{fontSize:17,color:C.text,letterSpacing:1,marginBottom:5}}>OPERATIVE MODE</div>
+          <div style={{fontSize:14,color:C.textDim,marginBottom:12}}>Controls NegaDuck's tone and mission briefing style</div>
           {Object.entries(OP_MODES).map(([key,mode])=>(
             <div key={key} onClick={()=>upd("opMode",key)}
-              style={{display:"flex",alignItems:"center",gap:12,padding:"10px 12px",marginBottom:6,border:`1px solid ${save.opMode===key?mode.color:C.slate}`,background:save.opMode===key?mode.color+"14":C.bgCard,cursor:"pointer",transition:"all .2s"}}>
-              <div style={{fontSize:22}}>{mode.icon}</div>
+              style={{display:"flex",alignItems:"center",gap:14,padding:"12px 14px",marginBottom:8,border:`1px solid ${save.opMode===key?mode.color:C.slateHi}`,background:save.opMode===key?mode.color+"18":C.bgCard,cursor:"pointer",transition:"all .2s"}}>
+              <div style={{fontSize:26}}>{mode.icon}</div>
               <div style={{flex:1}}>
-                <div style={{fontSize:14,color:save.opMode===key?mode.color:C.text,letterSpacing:1}}>{mode.label}</div>
-                <div style={{fontSize:11,color:C.textDim,marginTop:1}}>{key==="junior"?"Cartoon villain · Kid-friendly":key==="shadow"?"Serious threat · Comic flair":"Full noir · Nation state"}</div>
+                <div style={{fontSize:17,color:save.opMode===key?mode.color:C.text,letterSpacing:1}}>{mode.label}</div>
+                <div style={{fontSize:14,color:C.textDim,marginTop:3}}>{key==="junior"?"Cartoon villain · Kid-friendly":key==="shadow"?"Serious threat · Comic flair":"Full noir · Nation state"}</div>
               </div>
-              {save.opMode===key&&<div style={{color:mode.color,fontSize:16}}>✓</div>}
+              {save.opMode===key&&<div style={{color:mode.color,fontSize:20}}>✓</div>}
             </div>
           ))}
         </div>
 
         {/* AUDIO */}
-        <div style={{fontSize:11,color:C.accent,letterSpacing:4,margin:"16px 0 6px",paddingBottom:4,borderBottom:`1px solid ${C.purpleHi}`}}>AUDIO & FEEL</div>
+        <div style={{fontSize:14,color:C.accent,letterSpacing:4,margin:"18px 0 8px",paddingBottom:5,borderBottom:`1px solid ${C.purpleHi}`}}>AUDIO & FEEL</div>
         {row("SOUND EFFECTS","Retro beeps · Achievement chimes · Rank-up fanfare",toggle(save.settings.soundEnabled,v=>{updS("soundEnabled",v);soundEngine.enabled=v;if(v){soundEngine.init();soundEngine.play("navigate");}}))}
         {row("HAPTIC FEEDBACK","Vibration on captures · Errors · Rank-up",toggle(save.settings.hapticsEnabled,v=>{updS("hapticsEnabled",v);haptic.enabled=v;if(v)haptic.medium();}))}
-        <div style={{padding:"10px 0 12px",borderBottom:`1px solid ${C.slate}`}}>
-          <div style={{fontSize:11,color:C.textDim,letterSpacing:2,marginBottom:8}}>TEST SOUNDS</div>
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+        <div style={{padding:"12px 0 14px",borderBottom:`1px solid ${C.slate}`}}>
+          <div style={{fontSize:14,color:C.textDim,letterSpacing:2,marginBottom:10}}>TEST SOUNDS</div>
+          <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
             {[{l:"KEYPRESS",s:"keypress"},{l:"ERROR",s:"error"},{l:"FLAG ⚑",s:"flag"},{l:"RANK UP",s:"rankup"},{l:"QUACK 🦆",s:"quack"},{l:"BRIEFING",s:"briefing"}].map(({l,s})=>(
               <button key={s} onClick={()=>{soundEngine.init();soundEngine.play(s);haptic.light();}}
-                style={{padding:"5px 10px",fontSize:12,letterSpacing:1,fontFamily:"'VT323',monospace",background:"transparent",border:`1px solid ${C.slateHi}`,color:C.textDim,cursor:"pointer"}}>
+                style={{padding:"6px 13px",fontSize:15,letterSpacing:1,fontFamily:"'VT323',monospace",background:"transparent",border:`1px solid ${C.slateHi}`,color:C.textDim,cursor:"pointer"}}>
                 {l}
               </button>
             ))}
@@ -1041,30 +1041,30 @@ function SettingsScreen({save,onUpdate,onBack,onReset,C}) {
         </div>
 
         {/* THEME */}
-        <div style={{fontSize:11,color:C.accent,letterSpacing:4,margin:"16px 0 6px",paddingBottom:4,borderBottom:`1px solid ${C.purpleHi}`}}>THEME</div>
+        <div style={{fontSize:14,color:C.accent,letterSpacing:4,margin:"18px 0 8px",paddingBottom:5,borderBottom:`1px solid ${C.purpleHi}`}}>THEME</div>
         <div style={{padding:"10px 0",borderBottom:`1px solid ${C.slate}`}}>
           {Object.entries(THEMES).map(([key,theme])=>(
             <div key={key} onClick={()=>updS("theme",key)}
-              style={{display:"flex",alignItems:"center",gap:12,padding:"10px 12px",marginBottom:6,border:`2px solid ${save.settings.theme===key?theme.teal:C.slate}`,background:save.settings.theme===key?theme.purple+"22":C.bgCard,cursor:"pointer",transition:"all .2s"}}>
-              <div style={{fontSize:24}}>{theme.icon}</div>
+              style={{display:"flex",alignItems:"center",gap:14,padding:"12px 14px",marginBottom:8,border:`2px solid ${save.settings.theme===key?theme.teal:C.slateHi}`,background:save.settings.theme===key?theme.purple+"28":C.bgCard,cursor:"pointer",transition:"all .2s"}}>
+              <div style={{fontSize:28}}>{theme.icon}</div>
               <div style={{flex:1}}>
-                <div style={{fontSize:15,color:save.settings.theme===key?theme.teal:C.text,letterSpacing:2}}>{theme.name}</div>
-                <div style={{fontSize:11,color:C.textDim,marginTop:1}}>{theme.desc}</div>
-                <div style={{display:"flex",gap:4,marginTop:6}}>
-                  {[theme.bg,theme.purple,theme.teal,theme.gold,theme.red].map((col,i)=><div key={i} style={{width:16,height:8,background:col,border:`1px solid ${C.slateHi}`}}/>)}
+                <div style={{fontSize:18,color:save.settings.theme===key?theme.teal:C.text,letterSpacing:2}}>{theme.name}</div>
+                <div style={{fontSize:14,color:C.textDim,marginTop:3}}>{theme.desc}</div>
+                <div style={{display:"flex",gap:5,marginTop:8}}>
+                  {[theme.bg,theme.purple,theme.teal,theme.gold,theme.red].map((col,i)=><div key={i} style={{width:20,height:10,background:col,border:`1px solid ${C.slateHi}`}}/>)}
                 </div>
               </div>
-              {save.settings.theme===key&&<div style={{color:theme.teal,fontSize:16}}>✓</div>}
+              {save.settings.theme===key&&<div style={{color:theme.teal,fontSize:20}}>✓</div>}
             </div>
           ))}
         </div>
 
         {/* DANGER ZONE */}
-        <div style={{fontSize:11,color:"#FF4466",letterSpacing:4,margin:"16px 0 6px",paddingBottom:4,borderBottom:"1px solid rgba(255,68,102,0.2)"}}>DANGER ZONE</div>
-        <div style={{padding:"12px 0"}}>
-          <div style={{fontSize:12,color:C.textDim,marginBottom:10,lineHeight:1.6}}>Reset all progress — flags, XP, achievements, tokens. Cannot be undone.</div>
+        <div style={{fontSize:14,color:"#FF4466",letterSpacing:4,margin:"18px 0 8px",paddingBottom:5,borderBottom:"1px solid rgba(255,68,102,0.25)"}}>DANGER ZONE</div>
+        <div style={{padding:"14px 0"}}>
+          <div style={{fontSize:15,color:C.textDim,marginBottom:12,lineHeight:1.6}}>Reset all progress — flags, XP, achievements, tokens. Cannot be undone.</div>
           <button onClick={()=>{if(confirmReset){soundEngine.play("error");haptic.heavy();onReset();}else{setConfirmReset(true);setTimeout(()=>setConfirmReset(false),4000);}}}
-            style={{width:"100%",padding:"12px",fontSize:16,letterSpacing:3,fontFamily:"'VT323',monospace",cursor:"pointer",background:confirmReset?"#FF4466":"transparent",border:"2px solid #FF4466",color:confirmReset?"#000":"#FF4466",transition:"all .2s"}}>
+            style={{width:"100%",padding:"14px",fontSize:19,letterSpacing:3,fontFamily:"'VT323',monospace",cursor:"pointer",background:confirmReset?"#FF4466":"transparent",border:"2px solid #FF4466",color:confirmReset?"#000":"#FF4466",transition:"all .2s"}}>
             {confirmReset?"⚠ TAP AGAIN TO CONFIRM":"RESET ALL PROGRESS"}
           </button>
         </div>
@@ -1475,42 +1475,42 @@ export default function Darkwing() {
   const renderLine=(line,i)=>{
     if(line.type==="blank") return <div key={i} style={{height:5}}/>;
     if(line.type==="prompt") return (
-      <div key={i} style={{display:"flex",flexWrap:"wrap",gap:"0 5px",marginBottom:2}}>
+      <div key={i} style={{display:"flex",flexWrap:"wrap",gap:"0 6px",marginBottom:3,fontSize:16}}>
         <span style={{color:C.termPrompt}}>{(playerHandle||"operative").toLowerCase()}</span>
         <span style={{color:C.textFade}}>@darkwing:~#</span>
         <span style={{color:"#fff",wordBreak:"break-all"}}>{line.text}</span>
       </div>
     );
-    const cols={sys:C.textFade,output:C.termOutput,error:C.red,hint:C.gold,success:C.accent,info:C.textDim,story:C.textDim+"BB"};
-    const glow=line.type==="success"?{textShadow:`0 0 6px ${C.accent}`}:{};
-    return <div key={i} style={{color:cols[line.type]||C.termOutput,fontSize:12,lineHeight:1.55,wordBreak:"break-word",marginBottom:1,...glow}}>{line.text}</div>;
+    const cols={sys:C.textFade,output:C.termOutput,error:C.red,hint:C.gold,success:C.accent,info:C.textDim,story:C.textDim};
+    const glow=line.type==="success"?{textShadow:`0 0 8px ${C.accent}`}:{};
+    return <div key={i} style={{color:cols[line.type]||C.termOutput,fontSize:16,lineHeight:1.65,wordBreak:"break-word",marginBottom:2,...glow}}>{line.text}</div>;
   };
 
   // ── STYLES ────────────────────────────────────────────────────────
   const S={
-    root:{fontFamily:"'VT323','Courier New',monospace",background:C.bg,color:C.text,minHeight:"100vh",maxWidth:480,margin:"0 auto",position:"relative",overflow:"hidden",filter:glitch?"hue-rotate(60deg) brightness(1.6)":"none",transition:"filter .08s"},
-    scanlines:{position:"fixed",inset:0,zIndex:999,pointerEvents:"none",background:"repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px)"},
-    vignette:{position:"fixed",inset:0,zIndex:998,pointerEvents:"none",background:"radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.75) 100%)"},
-    hdr:{background:C.bgDeep,borderBottom:`1px solid ${C.purple}`,padding:"7px 13px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:20},
-    logo:{fontSize:22,color:C.gold,letterSpacing:5,textShadow:`0 0 14px ${C.gold}88`},
+    root:{fontFamily:"'VT323','Courier New',monospace",background:C.bg,color:C.text,minHeight:"100vh",maxWidth:520,margin:"0 auto",position:"relative",overflow:"hidden",filter:glitch?"hue-rotate(60deg) brightness(1.6)":"none",transition:"filter .08s"},
+    scanlines:{position:"fixed",inset:0,zIndex:999,pointerEvents:"none",background:"repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,0,0,0.03) 4px,rgba(0,0,0,0.03) 5px)"},
+    vignette:{position:"fixed",inset:0,zIndex:998,pointerEvents:"none",background:"radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.65) 100%)"},
+    hdr:{background:C.bgDeep,borderBottom:`2px solid ${C.purple}`,padding:"10px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:20},
+    logo:{fontSize:30,color:C.gold,letterSpacing:5,textShadow:`0 0 18px ${C.gold}99`},
     tabs:{display:"flex",background:C.bgDeep,borderBottom:`1px solid ${C.purple}`},
-    tab:a=>({flex:1,padding:"8px 2px",background:"none",border:"none",fontFamily:"'VT323',monospace",fontSize:14,letterSpacing:1,color:a?C.accent:C.textDim,borderBottom:a?`2px solid ${C.accent}`:"2px solid transparent",cursor:"pointer",transition:"all .15s"}),
-    card:(lk,dn)=>({margin:"8px 12px",padding:"12px 13px",border:`1px solid ${dn?C.purple:lk?C.textFade:C.purpleHi}`,borderLeft:`3px solid ${dn?C.accent:lk?C.textFade:C.gold}`,background:lk?C.bgDeep:dn?C.bgCard+"88":C.bgCard,cursor:lk?"not-allowed":"pointer",position:"relative",opacity:lk?0.5:1,transition:"all .2s"}),
-    termWrap:{background:C.bgDeep,border:`1px solid ${C.purple}`,borderTop:`2px solid ${C.accent}`,margin:"0 12px 6px"},
-    termBar:{background:C.bgCard,borderBottom:`1px solid ${C.slate}`,padding:"5px 10px",display:"flex",alignItems:"center",gap:7},
-    termBody:{padding:"10px 11px",minHeight:200,height:"50vh",maxHeight:"55vh",overflowY:"auto",fontSize:13,overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"},
-    termInput:{display:"flex",alignItems:"center",gap:6,padding:"5px 11px",borderTop:`1px solid ${C.slate}`,background:C.bgDeep},
-    termField:{flex:1,background:"none",border:"none",outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:14,caretColor:C.accent},
-    flagBox:{margin:"0 12px 6px",padding:"12px 13px",border:`1px solid ${C.gold}44`,background:C.bgCard,borderLeft:`3px solid ${C.gold}`},
-    flagField:{flex:1,background:C.bgDeep,border:`1px solid ${C.slate}`,outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:14,padding:"6px 9px",caretColor:C.gold},
-    lessonBox:{margin:"0 12px 10px",padding:"12px 13px",border:`1px solid ${C.accent}33`,borderLeft:`3px solid ${C.gold}`,background:C.bgCard},
-    btn:v=>({padding:"8px 16px",fontSize:14,letterSpacing:2,fontFamily:"'VT323',monospace",cursor:"pointer",border:`1px solid ${v==="gold"?C.gold:C.accent}`,background:v==="primary"?C.accent:v==="gold"?C.gold:"transparent",color:v==="primary"||v==="gold"?"#000":C.accent}),
-    tokenToast:{position:"fixed",top:62,right:14,zIndex:500,fontSize:18,color:C.gold,background:C.bgCard,border:`1px solid ${C.gold}`,padding:"6px 14px",letterSpacing:2,textShadow:`0 0 8px ${C.gold}`,animation:"slideDown .3s ease, fadeOut .4s ease 1.8s forwards"},
-    duckyBox:{margin:"0 12px 8px",display:"flex",gap:10,alignItems:"flex-start",padding:"10px 12px",background:`${C.purple}22`,border:`1px solid ${C.purpleHi}`,borderLeft:`3px solid ${C.gold}`,animation:"slideDown .3s ease"},
-    boardRow:(i,me)=>({display:"flex",alignItems:"center",gap:10,padding:"9px 13px",background:me?`${C.purple}22`:i%2===0?C.bgCard:C.bg,borderLeft:me?`3px solid ${C.gold}`:"3px solid transparent"}),
+    tab:a=>({flex:1,padding:"11px 4px",background:"none",border:"none",fontFamily:"'VT323',monospace",fontSize:17,letterSpacing:1,color:a?C.accent:C.textDim,borderBottom:a?`3px solid ${C.accent}`:"3px solid transparent",cursor:"pointer",transition:"all .15s"}),
+    card:(lk,dn)=>({margin:"10px 14px",padding:"14px 16px",border:`1px solid ${dn?C.purple:lk?C.textFade:C.purpleHi}`,borderLeft:`4px solid ${dn?C.accent:lk?C.textFade:C.gold}`,background:lk?C.bgDeep:dn?C.bgCard+"88":C.bgCard,cursor:lk?"not-allowed":"pointer",position:"relative",opacity:lk?0.55:1,transition:"all .2s"}),
+    termWrap:{background:C.bgDeep,border:`1px solid ${C.purple}`,borderTop:`3px solid ${C.accent}`,margin:"0 14px 8px"},
+    termBar:{background:C.bgCard,borderBottom:`1px solid ${C.slate}`,padding:"7px 12px",display:"flex",alignItems:"center",gap:8},
+    termBody:{padding:"12px 14px",minHeight:220,height:"52vh",maxHeight:"58vh",overflowY:"auto",fontSize:16,overscrollBehavior:"contain",WebkitOverflowScrolling:"touch"},
+    termInput:{display:"flex",alignItems:"center",gap:8,padding:"8px 14px",borderTop:`1px solid ${C.slate}`,background:C.bgDeep},
+    termField:{flex:1,background:"none",border:"none",outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:17,caretColor:C.accent},
+    flagBox:{margin:"0 14px 8px",padding:"14px 16px",border:`1px solid ${C.gold}55`,background:C.bgCard,borderLeft:`4px solid ${C.gold}`},
+    flagField:{flex:1,background:C.bgDeep,border:`1px solid ${C.slate}`,outline:"none",color:"#fff",fontFamily:"'VT323',monospace",fontSize:17,padding:"8px 12px",caretColor:C.gold},
+    lessonBox:{margin:"0 14px 12px",padding:"14px 16px",border:`1px solid ${C.accent}33`,borderLeft:`4px solid ${C.gold}`,background:C.bgCard},
+    btn:v=>({padding:"10px 20px",fontSize:17,letterSpacing:2,fontFamily:"'VT323',monospace",cursor:"pointer",border:`1px solid ${v==="gold"?C.gold:C.accent}`,background:v==="primary"?C.accent:v==="gold"?C.gold:"transparent",color:v==="primary"||v==="gold"?"#000":C.accent}),
+    tokenToast:{position:"fixed",top:70,right:14,zIndex:500,fontSize:21,color:C.gold,background:C.bgCard,border:`1px solid ${C.gold}`,padding:"8px 16px",letterSpacing:2,textShadow:`0 0 10px ${C.gold}`,animation:"slideDown .3s ease, fadeOut .4s ease 1.8s forwards"},
+    duckyBox:{margin:"0 14px 10px",display:"flex",gap:12,alignItems:"flex-start",padding:"12px 14px",background:`${C.purple}28`,border:`1px solid ${C.purpleHi}`,borderLeft:`4px solid ${C.gold}`,animation:"slideDown .3s ease"},
+    boardRow:(i,me)=>({display:"flex",alignItems:"center",gap:10,padding:"11px 16px",background:me?`${C.purple}28`:i%2===0?C.bgCard:C.bg,borderLeft:me?`4px solid ${C.gold}`:"4px solid transparent"}),
   };
 
-  const GCSS=`@keyframes blink{0%,100%{opacity:1}50%{opacity:0}} @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}} @keyframes fadeOut{to{opacity:0}} @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}} @keyframes duck{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}} @keyframes rankUp{from{transform:scale(0.5) rotate(-10deg);opacity:0}to{transform:scale(1);opacity:1}} @keyframes spin{from{transform:rotate(-20deg) scale(0.8)}to{transform:rotate(0)scale(1)}} @keyframes pingRing{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.5);opacity:0}} @keyframes pulse{0%,100%{box-shadow:0 0 0 0 ${C.accent}88}50%{box-shadow:0 0 0 10px transparent}} *{box-sizing:border-box} ::-webkit-scrollbar{width:3px} ::-webkit-scrollbar-thumb{background:${C.purple}}`;
+  const GCSS=`@keyframes blink{0%,100%{opacity:1}50%{opacity:0}} @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}} @keyframes fadeOut{to{opacity:0}} @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}} @keyframes duck{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}} @keyframes rankUp{from{transform:scale(0.5) rotate(-10deg);opacity:0}to{transform:scale(1);opacity:1}} @keyframes spin{from{transform:rotate(-20deg) scale(0.8)}to{transform:rotate(0)scale(1)}} @keyframes pingRing{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.5);opacity:0}} @keyframes pulse{0%,100%{box-shadow:0 0 0 0 ${C.accent}99}50%{box-shadow:0 0 0 12px transparent}} *{box-sizing:border-box} ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-thumb{background:${C.purple};border-radius:3px} ::-webkit-scrollbar-track{background:${C.bgDeep}}`;
 
   // Route to special screens
   if(!onboarded) return <Onboarding onComplete={(h,m)=>{setSave(p=>({...p,onboarded:true,playerHandle:h,opMode:m}));setDuckyMsg(duck("welcome"));}}/>;
@@ -1531,41 +1531,41 @@ export default function Darkwing() {
         <RankUpModal rank={rankUpData} onClose={()=>setRankUpData(null)} C={C}/>
 
         <div style={S.hdr}>
-          <button style={{...S.btn(),padding:"4px 10px",fontSize:13}} onClick={onBack}>← BACK</button>
-          <div style={{fontSize:11,color:C.textDim,letterSpacing:1}}>{category&&catIcon(category)} {subtitle}</div>
+          <button style={{...S.btn(),padding:"6px 14px",fontSize:16}} onClick={onBack}>← BACK</button>
+          <div style={{fontSize:14,color:C.textDim,letterSpacing:1}}>{category&&catIcon(category)} {subtitle}</div>
           <div style={{display:"flex",alignItems:"center",gap:8}}>
-            {replay&&<span style={{fontSize:11,color:C.gold,border:`1px solid ${C.gold}44`,padding:"1px 6px"}}>🔁 REPLAY</span>}
-            <span style={{fontSize:15,color:C.gold}}>{xpLabel}</span>
+            {replay&&<span style={{fontSize:14,color:C.gold,border:`1px solid ${C.gold}55`,padding:"2px 8px"}}>🔁 REPLAY</span>}
+            <span style={{fontSize:19,color:C.gold}}>{xpLabel}</span>
           </div>
         </div>
 
-        <div style={{padding:"8px 13px 5px",borderBottom:`1px solid ${C.slate}`}}>
-          {isDaily&&<div style={{fontSize:10,color:C.gold,letterSpacing:3,marginBottom:2}}>📅 DAILY</div>}
-          <div style={{fontSize:16,color:C.text,letterSpacing:1}}>{title}</div>
+        <div style={{padding:"10px 16px 7px",borderBottom:`1px solid ${C.slate}`}}>
+          {isDaily&&<div style={{fontSize:13,color:C.gold,letterSpacing:3,marginBottom:3}}>📅 DAILY</div>}
+          <div style={{fontSize:20,color:C.text,letterSpacing:1}}>{title}</div>
         </div>
 
-        <div style={{display:"flex",gap:4,padding:"5px 13px",borderBottom:`1px solid ${C.slate}`}}>
-          {steps.map((_,i)=><div key={i} style={{flex:1,height:3,background:i<stepIdx?C.accent:i===stepIdx?cc:C.slate,boxShadow:i===stepIdx?`0 0 5px ${cc}`:"none",transition:"all .3s"}}/>)}
+        <div style={{display:"flex",gap:5,padding:"7px 16px",borderBottom:`1px solid ${C.slate}`}}>
+          {steps.map((_,i)=><div key={i} style={{flex:1,height:5,background:i<stepIdx?C.accent:i===stepIdx?cc:C.slate,boxShadow:i===stepIdx?`0 0 6px ${cc}`:"none",transition:"all .3s",borderRadius:2}}/>)}
         </div>
 
         {duckyMsg&&(
           <div style={S.duckyBox}>
-            <div style={{fontSize:20,lineHeight:1,flexShrink:0}}>🦆</div>
+            <div style={{fontSize:26,lineHeight:1,flexShrink:0}}>🦆</div>
             <div style={{flex:1}}>
-              <div style={{fontSize:10,color:C.gold,letterSpacing:3,marginBottom:2}}>DUCKY</div>
-              <div style={{fontSize:12,color:C.text,lineHeight:1.5,whiteSpace:"pre-line"}}>{duckyMsg}</div>
+              <div style={{fontSize:13,color:C.gold,letterSpacing:3,marginBottom:3}}>DUCKY</div>
+              <div style={{fontSize:16,color:C.text,lineHeight:1.55,whiteSpace:"pre-line"}}>{duckyMsg}</div>
             </div>
-            <button onClick={()=>setDuckyMsg(null)} style={{background:"none",border:"none",color:C.textDim,fontSize:16,cursor:"pointer",padding:0}}>×</button>
+            <button onClick={()=>setDuckyMsg(null)} style={{background:"none",border:"none",color:C.textDim,fontSize:20,cursor:"pointer",padding:0}}>×</button>
           </div>
         )}
 
         <div style={{padding:"4px 0 0"}}>
           <div style={S.termWrap}>
             <div style={S.termBar}>
-              <div style={{width:7,height:7,borderRadius:"50%",background:C.red}}/>
-              <div style={{width:7,height:7,borderRadius:"50%",background:C.gold}}/>
-              <div style={{width:7,height:7,borderRadius:"50%",background:C.accent}}/>
-              <span style={{fontSize:10,color:C.textDim,letterSpacing:1,flex:1}}>{(playerHandle||"op").toLowerCase()}@darkwing — {title}</span>
+              <div style={{width:11,height:11,borderRadius:"50%",background:C.red}}/>
+              <div style={{width:11,height:11,borderRadius:"50%",background:C.gold}}/>
+              <div style={{width:11,height:11,borderRadius:"50%",background:C.accent}}/>
+              <span style={{fontSize:13,color:C.textDim,letterSpacing:1,flex:1}}>{(playerHandle||"op").toLowerCase()}@darkwing — {title}</span>
             </div>
             <div style={S.termBody} ref={termRef} onScroll={handleTermScroll}>
               {lines.map((l,i)=>renderLine(l,i))}
@@ -1573,7 +1573,7 @@ export default function Darkwing() {
             </div>
             {!showFlag&&(
               <div style={S.termInput} onClick={()=>{if(inputRef.current){inputRef.current.focus();}}}>
-                <span style={{color:C.termPrompt,fontSize:12,whiteSpace:"nowrap"}}>{(playerHandle||"op").toLowerCase()}@darkwing:~#</span>
+                <span style={{color:C.termPrompt,fontSize:16,whiteSpace:"nowrap"}}>{(playerHandle||"op").toLowerCase()}@darkwing:~#</span>
                 <input ref={inputRef} style={{...S.termField,opacity:typing?0.5:1}}
                   value={inputVal}
                   onChange={e=>{if(!typing){setInput(e.target.value);soundEngine.play("keypress");}}}
@@ -1590,15 +1590,15 @@ export default function Darkwing() {
         {!showFlag&&<CmdBar onSelect={cmd=>{setInput(cmd);inputRef.current?.focus();}} category={category} C={C}/>}
 
         {chalObj&&!showFlag&&(
-          <div style={{margin:"6px 12px 4px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 12px",border:`1px solid ${C.slate}`,background:C.bgCard,cursor:"pointer"}} onClick={()=>setShowHints(p=>!p)}>
-            <div style={{display:"flex",alignItems:"center",gap:8}}>
-              <span style={{color:C.gold}}>⚡</span>
-              <span style={{fontSize:13,color:C.gold,letterSpacing:2}}>HINTS</span>
-              {hints.penalty>0&&<span style={{fontSize:10,color:C.red,border:`1px solid ${C.red}44`,padding:"0 5px"}}>{hints.unlocked.length} USED · -{hints.penalty}pts</span>}
+          <div style={{margin:"8px 14px 5px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 14px",border:`1px solid ${C.slateHi}`,background:C.bgCard,cursor:"pointer"}} onClick={()=>setShowHints(p=>!p)}>
+            <div style={{display:"flex",alignItems:"center",gap:10}}>
+              <span style={{color:C.gold,fontSize:18}}>⚡</span>
+              <span style={{fontSize:17,color:C.gold,letterSpacing:2}}>HINTS</span>
+              {hints.penalty>0&&<span style={{fontSize:13,color:C.red,border:`1px solid ${C.red}55`,padding:"1px 7px"}}>{hints.unlocked.length} USED · -{hints.penalty}pts</span>}
             </div>
-            <div style={{display:"flex",alignItems:"center",gap:6}}>
-              <span style={{fontSize:13,color:C.gold}}>{hintTokens}🪙</span>
-              <span style={{color:C.textDim,fontSize:14}}>{showHints?"▲":"▼"}</span>
+            <div style={{display:"flex",alignItems:"center",gap:8}}>
+              <span style={{fontSize:17,color:C.gold}}>{hintTokens}🪙</span>
+              <span style={{color:C.textDim,fontSize:17}}>{showHints?"▲":"▼"}</span>
             </div>
           </div>
         )}
@@ -1606,24 +1606,24 @@ export default function Darkwing() {
 
         {showFlag&&(
           <div style={S.flagBox}>
-            <div style={{fontSize:12,color:C.gold,letterSpacing:3,marginBottom:8}}>⚑ SUBMIT FLAG</div>
-            {!isReplay&&hints?.penalty>0&&<div style={{fontSize:11,color:C.red,marginBottom:6}}>Hint penalty: -{hints.penalty}pts → Max: {Math.max(10,(chalObj?.points||0)-hints.penalty)}pts</div>}
-            {replay&&<div style={{fontSize:11,color:C.teal,marginBottom:6}}>🔁 Replay mode — no points awarded, stars may improve</div>}
+            <div style={{fontSize:16,color:C.gold,letterSpacing:3,marginBottom:10}}>⚑ SUBMIT FLAG</div>
+            {!isReplay&&hints?.penalty>0&&<div style={{fontSize:14,color:C.red,marginBottom:8}}>Hint penalty: -{hints.penalty}pts → Max: {Math.max(10,(chalObj?.points||0)-hints.penalty)}pts</div>}
+            {replay&&<div style={{fontSize:14,color:C.teal,marginBottom:8}}>🔁 Replay mode — no points awarded, stars may improve</div>}
             {flagRes==="correct"?(
               <div>
                 <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-                  <span style={{fontSize:18,color:C.accent,textShadow:`0 0 8px ${C.accent}`}}>✓ CORRECT!</span>
-                  {chalObj&&(starRatings||{})[chalObj.id]&&<Stars count={(starRatings||{})[chalObj.id]} size={18} C={C}/>}
+                  <span style={{fontSize:22,color:C.accent,textShadow:`0 0 10px ${C.accent}`}}>✓ CORRECT!</span>
+                  {chalObj&&(starRatings||{})[chalObj.id]&&<Stars count={(starRatings||{})[chalObj.id]} size={22} C={C}/>}
                 </div>
-                <div style={{fontSize:13,color:C.gold,marginBottom:8}}>
+                <div style={{fontSize:17,color:C.gold,marginBottom:10}}>
                   {isDaily?`+${activeDaily?.bonusXP}XP +2🪙`:replay?`Stars updated!`:`+${Math.max(10,(chalObj?.points||0)-(hints?.penalty||0))}pts`}
                 </div>
-                {chalObj&&<div style={{fontSize:12,color:C.textDim,lineHeight:1.5,marginBottom:10}}>{chalObj.lesson}</div>}
-                <button style={{...S.btn("success"),width:"100%",fontSize:16}} onClick={()=>setScreen("home")}>BACK TO OPS</button>
+                {chalObj&&<div style={{fontSize:15,color:C.textDim,lineHeight:1.6,marginBottom:12}}>{chalObj.lesson}</div>}
+                <button style={{...S.btn("success"),width:"100%",fontSize:19}} onClick={()=>setScreen("home")}>BACK TO OPS</button>
               </div>
             ):(
               <div>
-                {flagRes==="wrong"&&<div style={{color:C.red,fontSize:13,marginBottom:6}}>✗ WRONG FLAG</div>}
+                {flagRes==="wrong"&&<div style={{color:C.red,fontSize:17,marginBottom:8}}>✗ WRONG FLAG</div>}
                 <div style={{display:"flex",gap:8}}>
                   <input ref={isDaily?dailyFlagRef:flagRef} style={S.flagField} placeholder="CTF{...}" value={flagVal}
                     onChange={e=>setFlagVal(e.target.value)} onKeyDown={e=>e.key==="Enter"&&onSubmitFlag()}
@@ -1637,8 +1637,8 @@ export default function Darkwing() {
 
         {showLesson&&(
           <div style={S.lessonBox}>
-            <div style={{fontSize:11,color:C.gold,letterSpacing:4,marginBottom:6}}>◆ LESSON LEARNED</div>
-            <div style={{fontSize:13,color:C.textDim,lineHeight:1.6}}>{lessonContent}</div>
+            <div style={{fontSize:14,color:C.gold,letterSpacing:4,marginBottom:8}}>◆ LESSON LEARNED</div>
+            <div style={{fontSize:16,color:C.textDim,lineHeight:1.65}}>{lessonContent}</div>
             <div style={{marginTop:6}}>{activeMission?.tools.map(t=><span key={t} style={{display:"inline-block",fontSize:9,color:C.textFade,border:`1px solid ${C.slate}`,padding:"0 5px",margin:"2px"}}>{t}</span>)}</div>
             <button style={{...S.btn("primary"),width:"100%",fontSize:16,marginTop:12}} onClick={onComplete}>
               COLLECT +{activeMission?.xp}XP  +{activeMission?.tokenReward}🪙
@@ -1672,58 +1672,58 @@ export default function Darkwing() {
       <div style={S.hdr}>
         <div>
           <div style={S.logo}>🦆 DARKWING</div>
-          <div style={{fontSize:9,color:C.accent,letterSpacing:3}}>LET'S GET DANGEROUS</div>
+          <div style={{fontSize:12,color:C.accent,letterSpacing:3}}>LET'S GET DANGEROUS</div>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
           <div style={{textAlign:"right"}}>
-            <div style={{fontSize:14,color:rank.color,letterSpacing:1}}>{rank.icon} {rank.label}</div>
-            <div style={{fontSize:11,color:C.gold}}>{hintTokens||0}🪙 · {totalXP||0}XP</div>
+            <div style={{fontSize:17,color:rank.color,letterSpacing:1}}>{rank.icon} {rank.label}</div>
+            <div style={{fontSize:14,color:C.gold}}>{hintTokens||0}🪙 · {totalXP||0}XP</div>
           </div>
-          <button onClick={()=>{soundEngine.init();soundEngine.play("navigate");haptic.light();setScreen("settings");unlockAchievement("settings_found");}} style={{background:"none",border:`1px solid ${C.slate}`,color:C.textDim,fontSize:18,padding:"4px 8px",cursor:"pointer",fontFamily:"'VT323',monospace"}}>⚙</button>
+          <button onClick={()=>{soundEngine.init();soundEngine.play("navigate");haptic.light();setScreen("settings");unlockAchievement("settings_found");}} style={{background:"none",border:`1px solid ${C.slateHi}`,color:C.textDim,fontSize:22,padding:"5px 10px",cursor:"pointer",fontFamily:"'VT323',monospace"}}>⚙</button>
         </div>
       </div>
 
       {nextRank&&(
-        <div style={{padding:"5px 13px",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`}}>
-          <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
-            <span style={{fontSize:12,color:C.textDim}}>{rank.label}</span>
-            <span style={{fontSize:12,color:C.textDim}}>{nextRank.minXP-(totalXP||0)}XP to {nextRank.label}</span>
+        <div style={{padding:"7px 16px",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`}}>
+          <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+            <span style={{fontSize:14,color:C.textDim}}>{rank.label}</span>
+            <span style={{fontSize:14,color:C.textDim}}>{nextRank.minXP-(totalXP||0)}XP to {nextRank.label}</span>
           </div>
-          <div style={{height:3,background:C.slate,borderRadius:2}}>
-            <div style={{height:"100%",width:`${xpPct}%`,background:`linear-gradient(90deg,${C.purple},${C.accent})`,borderRadius:2,transition:"width .5s"}}/>
+          <div style={{height:5,background:C.slate,borderRadius:3}}>
+            <div style={{height:"100%",width:`${xpPct}%`,background:`linear-gradient(90deg,${C.purple},${C.accent})`,borderRadius:3,transition:"width .5s",boxShadow:`0 0 6px ${C.accent}66`}}/>
           </div>
         </div>
       )}
 
       {duckyMsg&&(
-        <div style={{...S.duckyBox,margin:"6px 12px"}}>
-          <div style={{fontSize:20,lineHeight:1,flexShrink:0}}>🦆</div>
+        <div style={{...S.duckyBox,margin:"8px 14px"}}>
+          <div style={{fontSize:26,lineHeight:1,flexShrink:0}}>🦆</div>
           <div style={{flex:1}}>
-            <div style={{fontSize:10,color:C.gold,letterSpacing:3,marginBottom:2}}>DUCKY</div>
-            <div style={{fontSize:12,color:C.text,lineHeight:1.5}}>{duckyMsg}</div>
+            <div style={{fontSize:13,color:C.gold,letterSpacing:3,marginBottom:3}}>DUCKY</div>
+            <div style={{fontSize:16,color:C.text,lineHeight:1.55}}>{duckyMsg}</div>
           </div>
-          <button onClick={()=>setDuckyMsg(null)} style={{background:"none",border:"none",color:C.textDim,fontSize:16,cursor:"pointer",padding:0}}>×</button>
+          <button onClick={()=>setDuckyMsg(null)} style={{background:"none",border:"none",color:C.textDim,fontSize:20,cursor:"pointer",padding:0}}>×</button>
         </div>
       )}
 
       {/* Daily banner */}
-      <div style={{margin:"4px 12px 6px",padding:"9px 13px",background:`${C.purple}22`,border:`1px solid ${C.gold}33`,borderLeft:`3px solid ${C.gold}`,cursor:dailySolved?"default":"pointer",opacity:dailySolved?0.6:1}} onClick={()=>{if(!dailySolved){soundEngine.init();soundEngine.play("daily");openDaily();}}}>
+      <div style={{margin:"8px 14px",padding:"12px 16px",background:`${C.purple}28`,border:`1px solid ${C.gold}44`,borderLeft:`4px solid ${C.gold}`,cursor:dailySolved?"default":"pointer",opacity:dailySolved?0.6:1}} onClick={()=>{if(!dailySolved){soundEngine.init();soundEngine.play("daily");openDaily();}}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div>
-            <div style={{fontSize:10,color:C.gold,letterSpacing:3,marginBottom:1}}>📅 DAILY CHALLENGE</div>
-            <div style={{fontSize:18,color:dailySolved?C.textDim:C.text}}>{dailySolved?"✓ COMPLETED TODAY":dailyChal.title}</div>
-            <div style={{fontSize:13,color:C.textDim}}>+{dailyChal.bonusXP}XP · +2🪙 · Resets midnight</div>
+            <div style={{fontSize:13,color:C.gold,letterSpacing:3,marginBottom:3}}>📅 DAILY CHALLENGE</div>
+            <div style={{fontSize:22,color:dailySolved?C.textDim:C.text}}>{dailySolved?"✓ COMPLETED TODAY":dailyChal.title}</div>
+            <div style={{fontSize:15,color:C.textDim}}>+{dailyChal.bonusXP}XP · +2🪙 · Resets midnight</div>
           </div>
-          {!dailySolved&&<div style={{fontSize:20,color:C.gold,animation:"blink 2s infinite"}}>▶</div>}
+          {!dailySolved&&<div style={{fontSize:26,color:C.gold,animation:"blink 2s infinite"}}>▶</div>}
         </div>
       </div>
 
       {/* Stats */}
       <div style={{display:"flex",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`,borderTop:`1px solid ${C.slate}`}}>
         {[{v:numSolved,l:"FLAGS"},{v:totalScore||0,l:"SCORE"},{v:(achievements||[]).length,l:"BADGES"}].map((s,i)=>(
-          <div key={i} style={{flex:1,textAlign:"center",padding:"7px 2px",borderRight:i<2?`1px solid ${C.slate}`:"none"}}>
-            <div style={{fontSize:26,color:C.accent,textShadow:`0 0 6px ${C.accent}44`}}>{s.v}</div>
-            <div style={{fontSize:12,color:C.textDim,letterSpacing:2}}>{s.l}</div>
+          <div key={i} style={{flex:1,textAlign:"center",padding:"10px 4px",borderRight:i<2?`1px solid ${C.slate}`:"none"}}>
+            <div style={{fontSize:36,color:C.accent,textShadow:`0 0 8px ${C.accent}55`}}>{s.v}</div>
+            <div style={{fontSize:14,color:C.textDim,letterSpacing:2}}>{s.l}</div>
           </div>
         ))}
       </div>
@@ -1737,9 +1737,9 @@ export default function Darkwing() {
       </div>
 
       {/* Dossier button */}
-      <div style={{display:"flex",justifyContent:"flex-end",padding:"4px 12px 0",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`}}>
+      <div style={{display:"flex",justifyContent:"flex-end",padding:"6px 14px",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`}}>
         <button onClick={()=>{soundEngine.play("navigate");haptic.light();setScreen("dossier");}}
-          style={{padding:"3px 10px",fontSize:11,letterSpacing:2,fontFamily:"'VT323',monospace",background:"transparent",border:`1px solid ${C.slate}`,color:C.textDim,cursor:"pointer"}}>
+          style={{padding:"5px 14px",fontSize:14,letterSpacing:2,fontFamily:"'VT323',monospace",background:"transparent",border:`1px solid ${C.slateHi}`,color:C.textDim,cursor:"pointer"}}>
           🪪 DOSSIER
         </button>
       </div>
@@ -1760,15 +1760,15 @@ export default function Darkwing() {
       {/* ── CTF ── */}
       {tab==="ctf"&&(
         <div style={{paddingBottom:40}}>
-          <div style={{display:"flex",overflowX:"auto",gap:5,padding:"7px 12px",borderBottom:`1px solid ${C.slate}`}}>
+          <div style={{display:"flex",overflowX:"auto",gap:6,padding:"9px 14px",borderBottom:`1px solid ${C.slate}`}}>
             {cats.map(c=>(
               <button key={c} onClick={()=>{soundEngine.play("navigate");haptic.light();setFilterCat(c);}}
-                style={{padding:"4px 10px",fontSize:11,letterSpacing:1,background:filterCat===c?catColor(c)+"22":"transparent",border:`1px solid ${filterCat===c?catColor(c):C.slate}`,color:filterCat===c?catColor(c):C.textDim,cursor:"pointer",whiteSpace:"nowrap",fontFamily:"'VT323',monospace"}}>
+                style={{padding:"5px 13px",fontSize:14,letterSpacing:1,background:filterCat===c?catColor(c)+"28":"transparent",border:`1px solid ${filterCat===c?catColor(c):C.slateHi}`,color:filterCat===c?catColor(c):C.textDim,cursor:"pointer",whiteSpace:"nowrap",fontFamily:"'VT323',monospace"}}>
                 {c!=="ALL"?catIcon(c)+" ":""}{c}
               </button>
             ))}
           </div>
-          <div style={{padding:"5px 13px 2px",fontSize:10,color:C.textDim,letterSpacing:2}}>
+          <div style={{padding:"6px 16px 4px",fontSize:13,color:C.textDim,letterSpacing:2}}>
             {CTF_CHALLENGES.filter(c=>(filterCat==="ALL"||c.category===filterCat)&&(solvedFlags||{})[c.id]).length}/
             {CTF_CHALLENGES.filter(c=>filterCat==="ALL"||c.category===filterCat).length} CAPTURED
           </div>
@@ -1780,32 +1780,31 @@ export default function Darkwing() {
             const stars=(starRatings||{})[chal.id]||0;
             return (
               <div key={chal.id} style={S.card(locked,!!solved)} onClick={()=>{if(!locked){soundEngine.init();soundEngine.play("navigate");haptic.light();initChallenge(chal,false);}}}>
-                <div style={{position:"absolute",top:8,right:8,display:"flex",gap:6,alignItems:"center"}}>
-                  {solved&&<Stars count={stars} size={11} C={C}/>}
-                  {locked&&<span style={{fontSize:14,color:C.textFade}}>🔒</span>}
-                  {/* Replay button */}
+                <div style={{position:"absolute",top:10,right:10,display:"flex",gap:8,alignItems:"center"}}>
+                  {solved&&<Stars count={stars} size={14} C={C}/>}
+                  {locked&&<span style={{fontSize:18,color:C.textFade}}>🔒</span>}
                   {solved&&!locked&&(
                     <button onClick={e=>{e.stopPropagation();soundEngine.init();soundEngine.play("replay");haptic.light();initChallenge(chal,true);}}
-                      style={{fontSize:10,color:C.teal,border:`1px solid ${C.teal}44`,padding:"1px 5px",background:"transparent",fontFamily:"'VT323',monospace",cursor:"pointer",letterSpacing:1}}>
+                      style={{fontSize:13,color:C.teal,border:`1px solid ${C.teal}55`,padding:"2px 8px",background:"transparent",fontFamily:"'VT323',monospace",cursor:"pointer",letterSpacing:1}}>
                       🔁 REPLAY
                     </button>
                   )}
                 </div>
-                <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
-                  <div style={{fontSize:15,color:locked?C.textFade:solved?C.textDim:C.text,letterSpacing:1,paddingRight:80}}>{catIcon(chal.category)} {chal.title}</div>
-                  <div style={{fontSize:13,color:solved?C.textDim:cc,border:`1px solid ${solved?C.textFade:cc}44`,padding:"0 6px",background:(solved?C.textFade:cc)+"11",flexShrink:0,marginTop:16}}>
+                <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
+                  <div style={{fontSize:19,color:locked?C.textFade:solved?C.textDim:C.text,letterSpacing:1,paddingRight:90}}>{catIcon(chal.category)} {chal.title}</div>
+                  <div style={{fontSize:16,color:solved?C.textDim:cc,border:`1px solid ${solved?C.textFade:cc}55`,padding:"0 8px",background:(solved?C.textFade:cc)+"14",flexShrink:0,marginTop:20}}>
                     {solved?`${solved.pts}/${chal.points}`:chal.points}
                   </div>
                 </div>
-                <div style={{fontSize:11,color:C.textDim,marginBottom:4}}>
-                  <span style={{color:locked?C.textFade:cc,marginRight:8}}>{chal.category}</span>
+                <div style={{fontSize:14,color:C.textDim,marginBottom:6}}>
+                  <span style={{color:locked?C.textFade:cc,marginRight:10}}>{chal.category}</span>
                   <span style={{color:diffColor(chal.difficulty)}}>{chal.difficulty}</span>
-                  {chal.city&&<span style={{color:C.textFade,marginLeft:8}}>{CITIES_FULL.find(c=>c.id===chal.city)?.flag} {CITIES_FULL.find(c=>c.id===chal.city)?.name}</span>}
-                  {hints.penalty>0&&<span style={{color:C.red,marginLeft:8}}>-{hints.penalty}pts</span>}
+                  {chal.city&&<span style={{color:C.textFade,marginLeft:10}}>{CITIES_FULL.find(c=>c.id===chal.city)?.flag} {CITIES_FULL.find(c=>c.id===chal.city)?.name}</span>}
+                  {hints.penalty>0&&<span style={{color:C.red,marginLeft:10}}>-{hints.penalty}pts</span>}
                 </div>
-                <div style={{fontSize:12,color:locked?C.textFade:C.textDim,lineHeight:1.4}}>{chal.description}</div>
-                {locked&&chal.requires?.length>0&&<div style={{fontSize:10,color:C.textFade,marginTop:3}}>🔒 Requires: {chal.requires.join(", ")}</div>}
-                <div style={{marginTop:5}}>{chal.tags.map(t=><span key={t} style={{display:"inline-block",fontSize:9,color:locked?C.textFade:cc,border:`1px solid ${(locked?C.textFade:cc)}22`,padding:"0 4px",margin:"2px"}}>{t}</span>)}</div>
+                <div style={{fontSize:15,color:locked?C.textFade:C.textDim,lineHeight:1.5}}>{chal.description}</div>
+                {locked&&chal.requires?.length>0&&<div style={{fontSize:13,color:C.textFade,marginTop:5}}>🔒 Requires: {chal.requires.join(", ")}</div>}
+                <div style={{marginTop:7}}>{chal.tags.map(t=><span key={t} style={{display:"inline-block",fontSize:12,color:locked?C.textFade:cc,border:`1px solid ${(locked?C.textFade:cc)}33`,padding:"0 6px",margin:"2px 3px"}}>{t}</span>)}</div>
               </div>
             );
           })}
@@ -1815,28 +1814,28 @@ export default function Darkwing() {
       {/* ── MISSIONS ── */}
       {tab==="missions"&&(
         <div style={{paddingBottom:40}}>
-          <div style={{padding:"7px 13px 4px",fontSize:10,color:C.textDim,letterSpacing:2}}>GUIDED LEARNING — EARN HINT TOKENS</div>
+          <div style={{padding:"9px 16px 6px",fontSize:13,color:C.textDim,letterSpacing:2}}>GUIDED LEARNING — EARN HINT TOKENS</div>
           {MISSIONS.map(m=>{
             const done=(completedMissions||{})[m.id];
             return (
               <div key={m.id} style={S.card(false,done)} onClick={()=>{soundEngine.init();soundEngine.play("navigate");haptic.light();openMission(m);}}>
-                {done&&<div style={{position:"absolute",top:8,right:8,fontSize:11,color:C.accent,letterSpacing:2}}>✓ DONE</div>}
-                <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
-                  <div style={{fontSize:15,color:done?C.textDim:C.text}}>{m.badge} {m.title}</div>
+                {done&&<div style={{position:"absolute",top:10,right:10,fontSize:14,color:C.accent,letterSpacing:2}}>✓ DONE</div>}
+                <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
+                  <div style={{fontSize:19,color:done?C.textDim:C.text}}>{m.badge} {m.title}</div>
                   <div style={{textAlign:"right"}}>
-                    <div style={{fontSize:12,color:done?C.textDim:C.gold}}>{m.xp}XP</div>
-                    <div style={{fontSize:11,color:done?C.textFade:C.accent}}>+{m.tokenReward}🪙</div>
+                    <div style={{fontSize:16,color:done?C.textDim:C.gold}}>{m.xp}XP</div>
+                    <div style={{fontSize:14,color:done?C.textFade:C.accent}}>+{m.tokenReward}🪙</div>
                   </div>
                 </div>
-                <div style={{fontSize:11,color:C.textDim,marginBottom:4}}>
-                  <span style={{color:C.gold,marginRight:8}}>{m.category}</span>
+                <div style={{fontSize:14,color:C.textDim,marginBottom:6}}>
+                  <span style={{color:C.gold,marginRight:10}}>{m.category}</span>
                   <span style={{color:diffColor(m.difficulty)}}>{m.difficulty}</span>
                 </div>
-                <div style={{fontSize:12,color:C.textDim}}>{m.description}</div>
+                <div style={{fontSize:15,color:C.textDim}}>{m.description}</div>
               </div>
             );
           })}
-          <div style={{margin:"10px 13px",padding:"10px 12px",border:`1px dashed ${C.slate}`,fontSize:11,color:C.textFade,lineHeight:1.7}}>
+          <div style={{margin:"12px 14px",padding:"12px 14px",border:`1px dashed ${C.slateHi}`,fontSize:14,color:C.textFade,lineHeight:1.7}}>
             🦆 Complete missions to earn hint tokens.<br/>
             Secret: Type <span style={{color:C.accent}}>quack</span> in any terminal! 🦆
           </div>
@@ -1846,18 +1845,18 @@ export default function Darkwing() {
       {/* ── BADGES ── */}
       {tab==="badges"&&(
         <div style={{paddingBottom:40}}>
-          <div style={{padding:"7px 13px 4px",fontSize:10,color:C.textDim,letterSpacing:2}}>{(achievements||[]).length}/{ACH_DEFS.length} UNLOCKED</div>
+          <div style={{padding:"9px 16px 6px",fontSize:13,color:C.textDim,letterSpacing:2}}>{(achievements||[]).length}/{ACH_DEFS.length} UNLOCKED</div>
           {ACH_DEFS.map(ach=>{
             const unlocked=(achievements||[]).includes(ach.id);
             return (
-              <div key={ach.id} style={{margin:"6px 12px",padding:"11px 13px",border:`1px solid ${unlocked?C.gold+"44":C.slate}`,background:unlocked?`${C.gold}08`:C.bgCard,display:"flex",gap:12,alignItems:"center"}}>
-                <div style={{fontSize:26,opacity:unlocked?1:0.2}}>{ach.icon}</div>
+              <div key={ach.id} style={{margin:"8px 14px",padding:"13px 16px",border:`1px solid ${unlocked?C.gold+"55":C.slateHi}`,background:unlocked?`${C.gold}0C`:C.bgCard,display:"flex",gap:14,alignItems:"center"}}>
+                <div style={{fontSize:34,opacity:unlocked?1:0.2,flexShrink:0}}>{ach.icon}</div>
                 <div style={{flex:1}}>
-                  <div style={{fontSize:15,color:unlocked?C.gold:C.textFade,letterSpacing:1}}>{ach.label}</div>
-                  <div style={{fontSize:11,color:C.textDim,marginTop:2}}>{ach.desc}</div>
-                  <div style={{fontSize:10,color:unlocked?C.accent:C.textFade,marginTop:2}}>+{ach.xp}XP{unlocked?" · EARNED":""}</div>
+                  <div style={{fontSize:19,color:unlocked?C.gold:C.textFade,letterSpacing:1}}>{ach.label}</div>
+                  <div style={{fontSize:14,color:C.textDim,marginTop:3}}>{ach.desc}</div>
+                  <div style={{fontSize:13,color:unlocked?C.accent:C.textFade,marginTop:3}}>+{ach.xp}XP{unlocked?" · EARNED":""}</div>
                 </div>
-                {unlocked&&<div style={{fontSize:16,color:C.accent}}>✓</div>}
+                {unlocked&&<div style={{fontSize:20,color:C.accent}}>✓</div>}
               </div>
             );
           })}
@@ -1867,38 +1866,38 @@ export default function Darkwing() {
       {/* ── BOARD ── */}
       {tab==="board"&&(
         <div style={{paddingBottom:40}}>
-          <div style={{padding:"7px 13px 2px",fontSize:10,color:C.textDim,letterSpacing:2}}>LIVE SCOREBOARD</div>
-          <div style={{display:"flex",padding:"5px 13px",borderBottom:`1px solid ${C.slate}`}}>
+          <div style={{padding:"9px 16px 4px",fontSize:13,color:C.textDim,letterSpacing:2}}>LIVE SCOREBOARD</div>
+          <div style={{display:"flex",padding:"6px 16px",borderBottom:`1px solid ${C.slate}`}}>
             {["#","HANDLE","SCORE","FLAGS"].map((h,i)=>(
-              <div key={h} style={{fontSize:10,color:C.textFade,letterSpacing:2,flex:i===1?3:1,textAlign:i>1?"right":"left"}}>{h}</div>
+              <div key={h} style={{fontSize:13,color:C.textFade,letterSpacing:2,flex:i===1?3:1,textAlign:i>1?"right":"left"}}>{h}</div>
             ))}
           </div>
           {(leaderboard||[]).map((row,i)=>(
             <div key={row.handle} style={S.boardRow(i,row.isPlayer)}>
-              <div style={{flex:1,fontSize:14,color:i===0?C.gold:C.textDim}}>{i===0?"◆":i+1}</div>
+              <div style={{flex:1,fontSize:17,color:i===0?C.gold:C.textDim}}>{i===0?"◆":i+1}</div>
               <div style={{flex:3}}>
-                <div style={{fontSize:15,color:row.isPlayer?C.gold:C.text,textShadow:row.isPlayer?`0 0 6px ${C.gold}`:"none"}}>
+                <div style={{fontSize:19,color:row.isPlayer?C.gold:C.text,textShadow:row.isPlayer?`0 0 8px ${C.gold}`:"none"}}>
                   {row.country} {row.isPlayer?playerHandle:row.handle}
                 </div>
               </div>
-              <div style={{flex:1,textAlign:"right",fontSize:16,color:row.isPlayer?C.gold:C.textDim}}>{row.score}</div>
-              <div style={{flex:1,textAlign:"right",fontSize:14,color:C.textDim}}>{row.solves}</div>
+              <div style={{flex:1,textAlign:"right",fontSize:20,color:row.isPlayer?C.gold:C.textDim}}>{row.score}</div>
+              <div style={{flex:1,textAlign:"right",fontSize:17,color:C.textDim}}>{row.solves}</div>
             </div>
           ))}
-          <div style={{margin:"14px 13px 0",fontSize:10,color:C.textDim,letterSpacing:2}}>CATEGORY PROGRESS</div>
+          <div style={{margin:"16px 16px 6px",fontSize:13,color:C.textDim,letterSpacing:2}}>CATEGORY PROGRESS</div>
           {[...new Set(CTF_CHALLENGES.map(c=>c.category))].map(cat=>{
             const cc2=CTF_CHALLENGES.filter(c=>c.category===cat);
             const s2=cc2.filter(c=>(solvedFlags||{})[c.id]).length;
             const pct=cc2.length?(s2/cc2.length)*100:0;
             const col=catColor(cat);
             return (
-              <div key={cat} style={{margin:"7px 13px 0"}}>
-                <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
-                  <span style={{fontSize:12,color:col}}>{catIcon(cat)} {cat}</span>
-                  <span style={{fontSize:11,color:C.textDim}}>{s2}/{cc2.length}</span>
+              <div key={cat} style={{margin:"9px 16px 0"}}>
+                <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+                  <span style={{fontSize:15,color:col}}>{catIcon(cat)} {cat}</span>
+                  <span style={{fontSize:14,color:C.textDim}}>{s2}/{cc2.length}</span>
                 </div>
-                <div style={{height:3,background:C.slate,borderRadius:2}}>
-                  <div style={{height:"100%",width:`${pct}%`,background:col,boxShadow:`0 0 4px ${col}`,transition:"width .4s",borderRadius:2}}/>
+                <div style={{height:5,background:C.slate,borderRadius:3}}>
+                  <div style={{height:"100%",width:`${pct}%`,background:col,boxShadow:`0 0 5px ${col}`,transition:"width .4s",borderRadius:3}}/>
                 </div>
               </div>
             );
