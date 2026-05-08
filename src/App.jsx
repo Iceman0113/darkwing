@@ -1341,18 +1341,18 @@ export default function Darkwing() {
 
   const handleChalCmd=e=>{
     if(e.key!=="Enter"||chalTyping||!activeChallenge) return;
-    const raw=chalInput.trim();if(!raw) return;
+    const raw=(chalInputRef.current?.value||"").trim();if(!raw) return;
     soundEngine.play("enter");haptic.light();
 
     if(normalize(raw)==="quack"){
       setChalLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);
-      setChalInput("");soundEngine.play("quack");haptic.success();unlockAchievement("quack_found");return;
+      if(chalInputRef.current)chalInputRef.current.value="";soundEngine.play("quack");haptic.success();unlockAchievement("quack_found");return;
     }
 
     const step=activeChallenge.steps[chalStepIdx];
     if(!step) return;
     const ok=normalize(raw)===normalize(step.cmd)||(step.aliases||[]).some(a=>normalize(raw)===normalize(a));
-    setChalLines(p=>[...p,{type:"prompt",text:raw}]);setChalInput("");
+    setChalLines(p=>[...p,{type:"prompt",text:raw}]);if(chalInputRef.current)chalInputRef.current.value="";
 
     if(ok){
       typeLines(step.output.split("\n"),setChalLines,setChalTyping,()=>{
@@ -1426,13 +1426,13 @@ export default function Darkwing() {
 
   const handleDailyCmd=e=>{
     if(e.key!=="Enter"||dailyTyping||!activeDaily) return;
-    const raw=dailyInput.trim();if(!raw) return;
+    const raw=(dailyInputRef.current?.value||"").trim();if(!raw) return;
     soundEngine.play("enter");haptic.light();
-    if(normalize(raw)==="quack"){setDailyLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);setDailyInput("");soundEngine.play("quack");unlockAchievement("quack_found");return;}
+    if(normalize(raw)==="quack"){setDailyLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);if(dailyInputRef.current)dailyInputRef.current.value="";soundEngine.play("quack");unlockAchievement("quack_found");return;}
     const step=activeDaily.steps[dailyStepIdx];
     if(!step) return;
     const ok=normalize(raw)===normalize(step.cmd)||(step.aliases||[]).some(a=>normalize(raw)===normalize(a));
-    setDailyLines(p=>[...p,{type:"prompt",text:raw}]);setDailyInput("");
+    setDailyLines(p=>[...p,{type:"prompt",text:raw}]);if(dailyInputRef.current)dailyInputRef.current.value="";
     if(ok){
       typeLines(step.output.split("\n"),setDailyLines,setDailyTyping,()=>{
         if(dailyStepIdx+1>=activeDaily.steps.length){setTimeout(()=>{setDailyLines(p=>[...p,{type:"blank"},{type:"success",text:"── SUBMIT THE FLAG ──"},{type:"blank"}]);setDailyShowFlag(true);setTimeout(()=>dailyFlagRef.current?.focus(),150);},300);}
@@ -1459,13 +1459,13 @@ export default function Darkwing() {
 
   const handleMsnCmd=e=>{
     if(e.key!=="Enter"||msnTyping||!activeMission) return;
-    const raw=msnInput.trim();if(!raw) return;
+    const raw=(msnInputRef.current?.value||"").trim();if(!raw) return;
     soundEngine.play("enter");haptic.light();
-    if(normalize(raw)==="quack"){setMsnLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);setMsnInput("");soundEngine.play("quack");unlockAchievement("quack_found");return;}
+    if(normalize(raw)==="quack"){setMsnLines(p=>[...p,{type:"prompt",text:raw},{type:"blank"},{type:"success",text:duck("quack")},{type:"blank"}]);if(msnInputRef.current)msnInputRef.current.value="";soundEngine.play("quack");unlockAchievement("quack_found");return;}
     const step=activeMission.steps[msnStepIdx];
     if(!step) return;
     const ok=normalize(raw)===normalize(step.cmd)||(step.aliases||[]).some(a=>normalize(raw)===normalize(a));
-    setMsnLines(p=>[...p,{type:"prompt",text:raw}]);setMsnInput("");
+    setMsnLines(p=>[...p,{type:"prompt",text:raw}]);if(msnInputRef.current)msnInputRef.current.value="";
     if(ok){
       typeLines(step.output.split("\n"),setMsnLines,setMsnTyping,()=>{
         if(msnStepIdx+1>=activeMission.steps.length){setTimeout(()=>{setMsnLines(p=>[...p,{type:"blank"},{type:"success",text:`██ MISSION COMPLETE — +${activeMission.xp}XP  +${activeMission.tokenReward}🪙 ██`},{type:"blank"}]);setMsnLesson(true);},300);}
@@ -1585,8 +1585,7 @@ export default function Darkwing() {
               <div style={S.termInput} onClick={()=>{if(inputRef.current){inputRef.current.focus();}}}>
                 <span style={{color:C.termPrompt,fontSize:16,whiteSpace:"nowrap"}}>{(playerHandle||"op").toLowerCase()}@darkwing:~#</span>
                 <input ref={inputRef} style={{...S.termField,opacity:typing?0.5:1}}
-                  value={inputVal}
-                  onChange={e=>{if(!typing){setInput(e.target.value);soundEngine.play("keypress");}}}
+                  onChange={e=>{if(!typing)soundEngine.play("keypress");}}
                   onKeyDown={e=>{if(!typing)onCmd(e);}}
                   placeholder={typing?"executing...":"type command... (try: quack)"}
                   autoCapitalize="none" autoCorrect="off" spellCheck={false}
@@ -1597,7 +1596,7 @@ export default function Darkwing() {
           </div>
         </div>
 
-        {!showFlag&&<CmdBar onSelect={cmd=>{setInput(cmd);inputRef.current?.focus();}} category={category} C={C}/>}
+        {!showFlag&&<CmdBar onSelect={cmd=>{if(inputRef.current){inputRef.current.value=cmd+" ";inputRef.current.focus();}}} category={category} C={C}/>}
 
         {chalObj&&!showFlag&&(
           <div style={{margin:"8px 14px 5px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 14px",border:`1px solid ${C.slateHi}`,background:C.bgCard,cursor:"pointer"}} onClick={()=>setShowHints(p=>!p)}>
