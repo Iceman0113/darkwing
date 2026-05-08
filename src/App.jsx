@@ -464,7 +464,7 @@ function BriefingRoom({challenge, opMode, onStart, onBack, C}) {
       {/* NegaDuck intel */}
       <div style={{margin:"12px 14px 0",padding:"10px 12px",background:"rgba(255,68,102,0.06)",border:"1px solid rgba(255,68,102,0.2)",borderLeft:"3px solid #FF4466"}}>
         <div style={{fontSize:10,color:"#FF4466",letterSpacing:3,marginBottom:4}}>{mode.negaDuckName||"NEGADUCK"} — INTEL</div>
-        <div style={{fontSize:12,color:"#CC8888",lineHeight:1.5,fontStyle:"italic"}}>
+        <div style={{fontSize:14,color:"#CC8888",lineHeight:1.6,fontStyle:"italic"}}>
           "{mode.negaLines[Math.floor(Date.now()/60000)%mode.negaLines.length]}"
         </div>
       </div>
@@ -900,7 +900,7 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
         <div style={{fontSize:18,flexShrink:0}}>🦹</div>
         <div>
           <div style={{fontSize:10,color:"#FF4466",letterSpacing:3,marginBottom:3}}>NEGADUCK INTERCEPT</div>
-          <div style={{fontSize:12,color:"#CC8888",lineHeight:1.5,fontStyle:"italic"}}>"{mode.negaLines[Math.floor(Date.now()/30000)%mode.negaLines.length]}"</div>
+          <div style={{fontSize:14,color:"#CC8888",lineHeight:1.6,fontStyle:"italic"}}>"{mode.negaLines[Math.floor(Date.now()/30000)%mode.negaLines.length]}"</div>
         </div>
       </div>
       <div style={{margin:"8px 12px",position:"relative",minHeight:220,background:`linear-gradient(135deg,${C.bgDeep} 0%,${C.purple}22 50%,${C.bgDeep} 100%)`,border:`2px solid ${C.purple}`,overflow:"hidden"}}>
@@ -909,7 +909,7 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
           {[20,40,60,80].map(y=><line key={"h"+y} x1="0%" y1={`${y}%`} x2="100%" y2={`${y}%`} stroke={C.teal} strokeWidth="0.5"/>)}
           {[20,40,60,80].map(x=><line key={"v"+x} x1={`${x}%`} y1="0%" x2={`${x}%`} y2="100%" stroke={C.teal} strokeWidth="0.5"/>)}
         </svg>
-        <div style={{position:"absolute",top:6,left:10,fontSize:9,color:C.textDim,letterSpacing:3,zIndex:2}}>DARKWING OPS MAP — 7 TARGETS</div>
+        <div style={{position:"absolute",top:6,left:10,fontSize:12,color:C.textDim,letterSpacing:2,zIndex:2}}>DARKWING OPS MAP — 7 TARGETS</div>
         {CITIES_FULL.map(city=>{
           const st=getCityStatus(city,solvedFlags); const col=sc[st]; const isH=hovered===city.id;
           return (
@@ -918,10 +918,10 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
               onMouseEnter={()=>{setHovered(city.id);soundEngine.play("navigate");}}
               onMouseLeave={()=>setHovered(null)}>
               {st==="active"&&<div style={{position:"absolute",inset:-8,borderRadius:"50%",border:`1px solid ${col}`,animation:"pingRing 2s infinite",opacity:0.5}}/>}
-              <div style={{width:32,height:32,borderRadius:"50%",background:C.bgCard,border:`2px solid ${col}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,boxShadow:isH?`0 0 14px ${col}`:"none",transition:"all .2s",transform:isH?"scale(1.2)":"scale(1)"}}>
+              <div style={{width:40,height:40,borderRadius:"50%",background:C.bgCard,border:`2px solid ${col}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,boxShadow:isH?`0 0 14px ${col}`:"none",transition:"all .2s",transform:isH?"scale(1.2)":"scale(1)"}}>
                 {city.flag}
               </div>
-              <div style={{position:"absolute",top:34,left:"50%",transform:"translateX(-50%)",whiteSpace:"nowrap",fontSize:8,color:col,letterSpacing:1,background:C.bgDeep+"CC",padding:"1px 4px"}}>{city.name.toUpperCase()}</div>
+              <div style={{position:"absolute",top:42,left:"50%",transform:"translateX(-50%)",whiteSpace:"nowrap",fontSize:11,color:col,letterSpacing:1,background:C.bgDeep+"CC",padding:"2px 6px"}}>{city.name.toUpperCase()}</div>
               <div style={{position:"absolute",top:-2,right:-2,width:8,height:8,borderRadius:"50%",background:col,boxShadow:`0 0 4px ${col}`}}/>
             </div>
           );
@@ -946,7 +946,7 @@ function WorldMap({solvedFlags,onCitySelect,opMode,C}) {
         {[{c:C.teal,l:"CLEARED"},{c:C.gold,l:"IN PROGRESS"},{c:C.purple,l:"AVAILABLE"},{c:C.textFade,l:"LOCKED"}].map(({c,l})=>(
           <div key={l} style={{display:"flex",alignItems:"center",gap:4}}>
             <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
-            <span style={{fontSize:9,color:C.textDim,letterSpacing:1}}>{l}</span>
+            <span style={{fontSize:12,color:C.textDim,letterSpacing:1}}>{l}</span>
           </div>
         ))}
       </div>
@@ -1487,7 +1487,7 @@ export default function Darkwing() {
     hdr:{background:C.bgDeep,borderBottom:`1px solid ${C.purple}`,padding:"7px 13px",display:"flex",alignItems:"center",justifyContent:"space-between",position:"sticky",top:0,zIndex:20},
     logo:{fontSize:22,color:C.gold,letterSpacing:5,textShadow:`0 0 14px ${C.gold}88`},
     tabs:{display:"flex",background:C.bgDeep,borderBottom:`1px solid ${C.purple}`},
-    tab:a=>({flex:1,padding:"8px 2px",background:"none",border:"none",fontFamily:"'VT323',monospace",fontSize:11,letterSpacing:1,color:a?C.accent:C.textDim,borderBottom:a?`2px solid ${C.accent}`:"2px solid transparent",cursor:"pointer",transition:"all .15s"}),
+    tab:a=>({flex:1,padding:"8px 2px",background:"none",border:"none",fontFamily:"'VT323',monospace",fontSize:14,letterSpacing:1,color:a?C.accent:C.textDim,borderBottom:a?`2px solid ${C.accent}`:"2px solid transparent",cursor:"pointer",transition:"all .15s"}),
     card:(lk,dn)=>({margin:"8px 12px",padding:"12px 13px",border:`1px solid ${dn?C.purple:lk?C.textFade:C.purpleHi}`,borderLeft:`3px solid ${dn?C.accent:lk?C.textFade:C.gold}`,background:lk?C.bgDeep:dn?C.bgCard+"88":C.bgCard,cursor:lk?"not-allowed":"pointer",position:"relative",opacity:lk?0.5:1,transition:"all .2s"}),
     termWrap:{background:C.bgDeep,border:`1px solid ${C.purple}`,borderTop:`2px solid ${C.accent}`,margin:"0 12px 6px"},
     termBar:{background:C.bgCard,borderBottom:`1px solid ${C.slate}`,padding:"5px 10px",display:"flex",alignItems:"center",gap:7},
@@ -1669,7 +1669,7 @@ export default function Darkwing() {
         </div>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           <div style={{textAlign:"right"}}>
-            <div style={{fontSize:12,color:rank.color,letterSpacing:1}}>{rank.icon} {rank.label}</div>
+            <div style={{fontSize:14,color:rank.color,letterSpacing:1}}>{rank.icon} {rank.label}</div>
             <div style={{fontSize:11,color:C.gold}}>{hintTokens||0}🪙 · {totalXP||0}XP</div>
           </div>
           <button onClick={()=>{soundEngine.init();soundEngine.play("navigate");haptic.light();setScreen("settings");unlockAchievement("settings_found");}} style={{background:"none",border:`1px solid ${C.slate}`,color:C.textDim,fontSize:18,padding:"4px 8px",cursor:"pointer",fontFamily:"'VT323',monospace"}}>⚙</button>
@@ -1679,8 +1679,8 @@ export default function Darkwing() {
       {nextRank&&(
         <div style={{padding:"5px 13px",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`}}>
           <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
-            <span style={{fontSize:9,color:C.textDim}}>{rank.label}</span>
-            <span style={{fontSize:9,color:C.textDim}}>{nextRank.minXP-(totalXP||0)}XP to {nextRank.label}</span>
+            <span style={{fontSize:12,color:C.textDim}}>{rank.label}</span>
+            <span style={{fontSize:12,color:C.textDim}}>{nextRank.minXP-(totalXP||0)}XP to {nextRank.label}</span>
           </div>
           <div style={{height:3,background:C.slate,borderRadius:2}}>
             <div style={{height:"100%",width:`${xpPct}%`,background:`linear-gradient(90deg,${C.purple},${C.accent})`,borderRadius:2,transition:"width .5s"}}/>
@@ -1704,8 +1704,8 @@ export default function Darkwing() {
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div>
             <div style={{fontSize:10,color:C.gold,letterSpacing:3,marginBottom:1}}>📅 DAILY CHALLENGE</div>
-            <div style={{fontSize:14,color:dailySolved?C.textDim:C.text}}>{dailySolved?"✓ COMPLETED TODAY":dailyChal.title}</div>
-            <div style={{fontSize:10,color:C.textDim}}>+{dailyChal.bonusXP}XP · +2🪙 · Resets midnight</div>
+            <div style={{fontSize:18,color:dailySolved?C.textDim:C.text}}>{dailySolved?"✓ COMPLETED TODAY":dailyChal.title}</div>
+            <div style={{fontSize:13,color:C.textDim}}>+{dailyChal.bonusXP}XP · +2🪙 · Resets midnight</div>
           </div>
           {!dailySolved&&<div style={{fontSize:20,color:C.gold,animation:"blink 2s infinite"}}>▶</div>}
         </div>
@@ -1715,8 +1715,8 @@ export default function Darkwing() {
       <div style={{display:"flex",background:C.bgDeep,borderBottom:`1px solid ${C.slate}`,borderTop:`1px solid ${C.slate}`}}>
         {[{v:numSolved,l:"FLAGS"},{v:totalScore||0,l:"SCORE"},{v:(achievements||[]).length,l:"BADGES"}].map((s,i)=>(
           <div key={i} style={{flex:1,textAlign:"center",padding:"7px 2px",borderRight:i<2?`1px solid ${C.slate}`:"none"}}>
-            <div style={{fontSize:20,color:C.accent,textShadow:`0 0 6px ${C.accent}44`}}>{s.v}</div>
-            <div style={{fontSize:9,color:C.textDim,letterSpacing:2}}>{s.l}</div>
+            <div style={{fontSize:26,color:C.accent,textShadow:`0 0 6px ${C.accent}44`}}>{s.v}</div>
+            <div style={{fontSize:12,color:C.textDim,letterSpacing:2}}>{s.l}</div>
           </div>
         ))}
       </div>
