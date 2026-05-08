@@ -378,8 +378,8 @@ const MISSIONS = [
 const DAILY_POOL = [
   {id:"d1",title:"MORNING RECON",category:"WEB",points:200,bonusXP:150,story:"Fresh intel. NegaDuck just went live.",description:"Enumerate corp-daily.net.",
     hints:[{tier:1,text:"Start with a port scan."},{tier:2,text:"nmap -sV then gobuster."},{tier:3,text:"nmap -sV corp-daily.net then gobuster dir"}],
-    steps:[{cmd:"nmap -sV corp-daily.net",hint:"Port scan",output:`80/tcp open http Apache 2.4.6\n22/tcp open ssh`},{cmd:"gobuster dir -u http://corp-daily.net -w /usr/share/wordlists/common.txt",hint:"Directory brute-force",output:`/.git (Status: 200) ← EXPOSED!\n\n[!!!] Source code leaking`}],
-    flag:"CTF{d4ily_r3c0n_p4ys_0ff}",lesson:"Exposed .git directories leak full source code.",tags:["daily","recon"]},
+    steps:[{cmd:"nmap -sV corp-daily.net",hint:"Port scan",output:`80/tcp open http Apache 2.4.6\n22/tcp open ssh`},{cmd:"gobuster dir -u http://corp-daily.net -w /usr/share/wordlists/common.txt",hint:"Directory brute-force",output:`/.git (Status: 200) ← EXPOSED!\n\n[!!!] Source code leaking via exposed .git directory`},{cmd:"curl http://corp-daily.net/.git/COMMIT_EDITMSG",hint:"Read the exposed git commit message",aliases:["curl http://corp-daily.net/.git/COMMIT_EDITMSG"],output:`Pushed live creds by accident - removing\n\nCTF{d4ily_r3c0n_p4ys_0ff}\n\n[!!!] FLAG CAPTURED — Full git history exposed to the internet`}],
+    flag:"CTF{d4ily_r3c0n_p4ys_0ff}",lesson:"Exposed .git directories leak full source code, commit history, and secrets. Block access to /.git in your web server config.",tags:["daily","recon"]},
 ];
 
 // ── HELPERS ───────────────────────────────────────────────────────
