@@ -1167,10 +1167,20 @@ export default function Darkwing() {
 
   useEffect(()=>{soundEngine.enabled=settings?.soundEnabled!==false;haptic.enabled=settings?.hapticsEnabled!==false;},[settings]);
 
-  // Track time played
+  // Track time played — batch writes every 30s to avoid a re-render every second
+  const timeAccumRef=useRef(0);
   useEffect(()=>{
-    const iv=setInterval(()=>{setSave(p=>({...p,totalTimePlayed:(p.totalTimePlayed||0)+1}));},1000);
-    return()=>clearInterval(iv);
+    const iv=setInterval(()=>{
+      timeAccumRef.current++;
+      if(timeAccumRef.current>=30){
+        const elapsed=timeAccumRef.current; timeAccumRef.current=0;
+        setSave(p=>({...p,totalTimePlayed:(p.totalTimePlayed||0)+elapsed}));
+      }
+    },1000);
+    return()=>{
+      clearInterval(iv);
+      if(timeAccumRef.current>0){const e=timeAccumRef.current;setSave(p=>({...p,totalTimePlayed:(p.totalTimePlayed||0)+e}));}
+    };
   },[]);
 
   // Streak
@@ -1650,9 +1660,9 @@ export default function Darkwing() {
     );
   };
 
-  if(screen==="challenge"&&activeChallenge) return <TermScreen title={activeChallenge.title} category={activeChallenge.category} subtitle={`${activeChallenge.category} · STEP ${Math.min(chalStepIdx+1,activeChallenge.steps.length)}/${activeChallenge.steps.length}`} xpLabel={`${activeChallenge.points}pts`} steps={activeChallenge.steps} stepIdx={chalStepIdx} lines={chalLines} termRef={chalTermRef} inputRef={chalInputRef} inputVal={chalInput} setInput={setChalInput} onCmd={handleChalCmd} typing={chalTyping} showFlag={chalShowFlag} flagVal={flagInput} setFlagVal={setFlagInput} flagRes={flagResult} onSubmitFlag={submitFlag} onBack={()=>setScreen("home")} chalObj={activeChallenge} replay={isReplay}/>;
-  if(screen==="daily"&&activeDaily) return <TermScreen title={activeDaily.title} category={activeDaily.category} subtitle={`DAILY · ${activeDaily.category}`} xpLabel={`+${activeDaily.bonusXP}XP`} steps={activeDaily.steps} stepIdx={dailyStepIdx} lines={dailyLines} termRef={dailyTermRef} inputRef={dailyInputRef} inputVal={dailyInput} setInput={setDailyInput} onCmd={handleDailyCmd} typing={dailyTyping} showFlag={dailyShowFlag} flagVal={dailyFlagInput} setFlagVal={setDailyFlagInput} flagRes={dailyFlagResult} onSubmitFlag={submitDailyFlag} onBack={()=>setScreen("home")} isDaily={true}/>;
-  if(screen==="mission"&&activeMission) return <TermScreen title={activeMission.title} category={activeMission.category} subtitle={`MISSION · ${activeMission.category}`} xpLabel={`+${activeMission.xp}XP`} steps={activeMission.steps} stepIdx={msnStepIdx} lines={msnLines} termRef={msnTermRef} inputRef={msnInputRef} inputVal={msnInput} setInput={setMsnInput} onCmd={handleMsnCmd} typing={msnTyping} showFlag={false} flagVal="" setFlagVal={()=>{}} flagRes={null} onSubmitFlag={()=>{}} onBack={()=>setScreen("home")} showLesson={msnLesson} lessonContent={activeMission.lesson} onComplete={completeMission}/>;
+  if(screen==="challenge"&&activeChallenge) return TermScreen({title:activeChallenge.title,category:activeChallenge.category,subtitle:`${activeChallenge.category} · STEP ${Math.min(chalStepIdx+1,activeChallenge.steps.length)}/${activeChallenge.steps.length}`,xpLabel:`${activeChallenge.points}pts`,steps:activeChallenge.steps,stepIdx:chalStepIdx,lines:chalLines,termRef:chalTermRef,inputRef:chalInputRef,inputVal:chalInput,setInput:setChalInput,onCmd:handleChalCmd,typing:chalTyping,showFlag:chalShowFlag,flagVal:flagInput,setFlagVal:setFlagInput,flagRes:flagResult,onSubmitFlag:submitFlag,onBack:()=>setScreen("home"),chalObj:activeChallenge,replay:isReplay});
+  if(screen==="daily"&&activeDaily) return TermScreen({title:activeDaily.title,category:activeDaily.category,subtitle:`DAILY · ${activeDaily.category}`,xpLabel:`+${activeDaily.bonusXP}XP`,steps:activeDaily.steps,stepIdx:dailyStepIdx,lines:dailyLines,termRef:dailyTermRef,inputRef:dailyInputRef,inputVal:dailyInput,setInput:setDailyInput,onCmd:handleDailyCmd,typing:dailyTyping,showFlag:dailyShowFlag,flagVal:dailyFlagInput,setFlagVal:setDailyFlagInput,flagRes:dailyFlagResult,onSubmitFlag:submitDailyFlag,onBack:()=>setScreen("home"),isDaily:true});
+  if(screen==="mission"&&activeMission) return TermScreen({title:activeMission.title,category:activeMission.category,subtitle:`MISSION · ${activeMission.category}`,xpLabel:`+${activeMission.xp}XP`,steps:activeMission.steps,stepIdx:msnStepIdx,lines:msnLines,termRef:msnTermRef,inputRef:msnInputRef,inputVal:msnInput,setInput:setMsnInput,onCmd:handleMsnCmd,typing:msnTyping,showFlag:false,flagVal:"",setFlagVal:()=>{},flagRes:null,onSubmitFlag:()=>{},onBack:()=>setScreen("home"),showLesson:msnLesson,lessonContent:activeMission.lesson,onComplete:completeMission});
 
   // ── HOME ──────────────────────────────────────────────────────────
   const rank=getRank(totalXP||0);
