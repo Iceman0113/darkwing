@@ -1247,6 +1247,9 @@ export default function Darkwing() {
   useEffect(()=>{smartScroll(chalTermRef);},[chalLines]);
   useEffect(()=>{smartScroll(msnTermRef);},[msnLines]);
   useEffect(()=>{smartScroll(dailyTermRef);},[dailyLines]);
+  // Re-scroll when the flag submit box appears — it resizes the terminal body and can shift the viewport
+  useEffect(()=>{ userScrolled.current=false; requestAnimationFrame(()=>smartScroll(chalTermRef)); },[chalShowFlag]);
+  useEffect(()=>{ userScrolled.current=false; requestAnimationFrame(()=>smartScroll(dailyTermRef)); },[dailyShowFlag]);
   useEffect(()=>{
     if(screen!=="challenge") return;
     const ts=[100,300,600].map(t=>setTimeout(()=>{ chalInputRef.current?.focus(); },t));
@@ -1293,8 +1296,12 @@ export default function Darkwing() {
   const typeLines=(lines,setTerm,setTyping,cb)=>{
     setTyping(true);let i=0;
     const iv=setInterval(()=>{
-      if(i<lines.length){setTerm(p=>[...p,{type:"output",text:lines[i]}]);soundEngine.play("output");i++;}
-      else{clearInterval(iv);setTyping(false);if(cb)cb();}
+      if(i<lines.length){
+        const txt=lines[i];
+        const isCTF=/CTF\{[^}]+\}/.test(txt);
+        setTerm(p=>[...p,{type:isCTF?"flag":"output",text:txt}]);
+        soundEngine.play("output");i++;
+      } else{clearInterval(iv);setTyping(false);if(cb)cb();}
     },22);
   };
 
@@ -1489,6 +1496,11 @@ export default function Darkwing() {
         <span style={{color:C.termPrompt}}>{(playerHandle||"operative").toLowerCase()}</span>
         <span style={{color:C.textFade}}>@darkwing:~#</span>
         <span style={{color:"#fff",wordBreak:"break-all"}}>{line.text}</span>
+      </div>
+    );
+    if(line.type==="flag") return (
+      <div key={i} style={{margin:"8px 0",padding:"10px 14px",background:`${C.gold}18`,border:`2px solid ${C.gold}`,borderLeft:`5px solid ${C.gold}`,color:C.gold,fontSize:19,letterSpacing:2,fontWeight:"bold",wordBreak:"break-all",textShadow:`0 0 12px ${C.gold}99`,lineHeight:1.5}}>
+        🚩 {line.text}
       </div>
     );
     const cols={sys:C.textFade,output:C.termOutput,error:C.red,hint:C.gold,success:C.accent,info:C.textDim,story:C.textDim};
