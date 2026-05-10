@@ -1595,55 +1595,55 @@ export default function Darkwing() {
               </div>
             )}
           </div>
-        </div>
 
-        {!showFlag&&<CmdBar onSelect={cmd=>{if(inputRef.current){inputRef.current.value=cmd+" ";inputRef.current.focus();}}} category={category} C={C}/>}
+          {!showFlag&&<CmdBar onSelect={cmd=>{if(inputRef.current){inputRef.current.value=cmd+" ";inputRef.current.focus();}}} category={category} C={C}/>}
 
-        {chalObj&&!showFlag&&(
-          <div style={{margin:"8px 14px 5px",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 14px",border:`1px solid ${C.slateHi}`,background:C.bgCard,cursor:"pointer"}} onClick={()=>setShowHints(p=>!p)}>
-            <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <span style={{color:C.gold,fontSize:18}}>⚡</span>
-              <span style={{fontSize:17,color:C.gold,letterSpacing:2}}>HINTS</span>
-              {hints.penalty>0&&<span style={{fontSize:13,color:C.red,border:`1px solid ${C.red}55`,padding:"1px 7px"}}>{hints.unlocked.length} USED · -{hints.penalty}pts</span>}
-            </div>
-            <div style={{display:"flex",alignItems:"center",gap:8}}>
-              <span style={{fontSize:17,color:C.gold}}>{hintTokens}🪙</span>
-              <span style={{color:C.textDim,fontSize:17}}>{showHints?"▲":"▼"}</span>
-            </div>
-          </div>
-        )}
-        {chalObj&&showHints&&!showFlag&&<HintPanel challenge={chalObj} hintTokens={hintTokens} unlockedHints={hints.unlocked} penaltyTotal={hints.penalty} onSpend={(t,c,p)=>spendHint(chalObj.id,t,c,p)} C={C}/>}
-
-        {showFlag&&(
-          <div style={S.flagBox}>
-            <div style={{fontSize:16,color:C.gold,letterSpacing:3,marginBottom:10}}>⚑ SUBMIT FLAG</div>
-            {!isReplay&&hints?.penalty>0&&<div style={{fontSize:14,color:C.red,marginBottom:8}}>Hint penalty: -{hints.penalty}pts → Max: {Math.max(10,(chalObj?.points||0)-hints.penalty)}pts</div>}
-            {replay&&<div style={{fontSize:14,color:C.teal,marginBottom:8}}>🔁 Replay mode — no points awarded, stars may improve</div>}
-            {flagRes==="correct"?(
-              <div>
-                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-                  <span style={{fontSize:22,color:C.accent,textShadow:`0 0 10px ${C.accent}`}}>✓ CORRECT!</span>
-                  {chalObj&&(starRatings||{})[chalObj.id]&&<Stars count={(starRatings||{})[chalObj.id]} size={22} C={C}/>}
-                </div>
-                <div style={{fontSize:17,color:C.gold,marginBottom:10}}>
-                  {isDaily?`+${activeDaily?.bonusXP}XP +2🪙`:replay?`Stars updated!`:`+${Math.max(10,(chalObj?.points||0)-(hints?.penalty||0))}pts`}
-                </div>
-                {chalObj&&<div style={{fontSize:15,color:C.textDim,lineHeight:1.6,marginBottom:12}}>{chalObj.lesson}</div>}
-                <button style={{...S.btn("success"),width:"100%",fontSize:19}} onClick={()=>setScreen("home")}>BACK TO OPS</button>
+          {chalObj&&!showFlag&&(
+            <div style={{margin:"8px 14px 5px",flexShrink:0,display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 14px",border:`1px solid ${C.slateHi}`,background:C.bgCard,cursor:"pointer"}} onClick={()=>setShowHints(p=>!p)}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <span style={{color:C.gold,fontSize:18}}>⚡</span>
+                <span style={{fontSize:17,color:C.gold,letterSpacing:2}}>HINTS</span>
+                {hints.penalty>0&&<span style={{fontSize:13,color:C.red,border:`1px solid ${C.red}55`,padding:"1px 7px"}}>{hints.unlocked.length} USED · -{hints.penalty}pts</span>}
               </div>
-            ):(
-              <div>
-                {flagRes==="wrong"&&<div style={{color:C.red,fontSize:17,marginBottom:8}}>✗ WRONG FLAG</div>}
-                <div style={{display:"flex",gap:8}}>
-                  <input ref={isDaily?dailyFlagRef:flagRef} style={S.flagField} placeholder="CTF{...}" value={flagVal}
-                    onChange={e=>setFlagVal(e.target.value)} onKeyDown={e=>e.key==="Enter"&&onSubmitFlag()}
-                    autoCapitalize="none" autoCorrect="off" spellCheck={false}/>
-                  <button style={{...S.btn("gold"),padding:"6px 14px"}} onClick={onSubmitFlag}>SUBMIT</button>
-                </div>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <span style={{fontSize:17,color:C.gold}}>{hintTokens}🪙</span>
+                <span style={{color:C.textDim,fontSize:17}}>{showHints?"▲":"▼"}</span>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+          {chalObj&&showHints&&!showFlag&&<HintPanel challenge={chalObj} hintTokens={hintTokens} unlockedHints={hints.unlocked} penaltyTotal={hints.penalty} onSpend={(t,c,p)=>spendHint(chalObj.id,t,c,p)} C={C}/>}
+
+          {showFlag&&(
+            <div style={{...S.flagBox,flexShrink:0,margin:"8px 14px"}}>
+              <div style={{fontSize:16,color:C.gold,letterSpacing:3,marginBottom:10}}>⚑ SUBMIT FLAG</div>
+              {!isReplay&&hints?.penalty>0&&<div style={{fontSize:14,color:C.red,marginBottom:8}}>Hint penalty: -{hints.penalty}pts → Max: {Math.max(10,(chalObj?.points||0)-hints.penalty)}pts</div>}
+              {replay&&<div style={{fontSize:14,color:C.teal,marginBottom:8}}>🔁 Replay mode — no points awarded, stars may improve</div>}
+              {flagRes==="correct"?(
+                <div>
+                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
+                    <span style={{fontSize:22,color:C.accent,textShadow:`0 0 10px ${C.accent}`}}>✓ CORRECT!</span>
+                    {chalObj&&(starRatings||{})[chalObj.id]&&<Stars count={(starRatings||{})[chalObj.id]} size={22} C={C}/>}
+                  </div>
+                  <div style={{fontSize:17,color:C.gold,marginBottom:10}}>
+                    {isDaily?`+${activeDaily?.bonusXP}XP +2🪙`:replay?`Stars updated!`:`+${Math.max(10,(chalObj?.points||0)-(hints?.penalty||0))}pts`}
+                  </div>
+                  {chalObj&&<div style={{fontSize:15,color:C.textDim,lineHeight:1.6,marginBottom:12}}>{chalObj.lesson}</div>}
+                  <button style={{...S.btn("success"),width:"100%",fontSize:19}} onClick={()=>setScreen("home")}>BACK TO OPS</button>
+                </div>
+              ):(
+                <div>
+                  {flagRes==="wrong"&&<div style={{color:C.red,fontSize:17,marginBottom:8}}>✗ WRONG FLAG</div>}
+                  <div style={{display:"flex",gap:8}}>
+                    <input ref={isDaily?dailyFlagRef:flagRef} style={S.flagField} placeholder="CTF{...}" value={flagVal}
+                      onChange={e=>setFlagVal(e.target.value)} onKeyDown={e=>e.key==="Enter"&&onSubmitFlag()}
+                      autoCapitalize="none" autoCorrect="off" spellCheck={false}/>
+                    <button style={{...S.btn("gold"),padding:"6px 14px"}} onClick={onSubmitFlag}>SUBMIT</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>{/* closes terminal area */}
 
         {showLesson&&(
           <div style={S.lessonBox}>
